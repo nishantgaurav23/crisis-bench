@@ -84,6 +84,24 @@ class IMDCycloneClass(str, Enum):
     SuCS = "SuCS"  # Super Cyclonic Storm
 
 
+class IMDColorCode(str, Enum):
+    """IMD weather warning color codes."""
+
+    GREEN = "green"
+    YELLOW = "yellow"
+    ORANGE = "orange"
+    RED = "red"
+
+
+class RiverLevelStatus(str, Enum):
+    """CWC river gauge level status."""
+
+    NORMAL = "normal"
+    WARNING = "warning"
+    DANGER = "danger"
+    EXTREME_DANGER = "extreme_danger"
+
+
 class AlertChannel(str, Enum):
     """Indian communication channels for emergency alerts."""
 
@@ -473,6 +491,8 @@ __all__ = [
     "LLMTier",
     "TaskStatus",
     "IMDCycloneClass",
+    "IMDColorCode",
+    "RiverLevelStatus",
     "AlertChannel",
     # Geo
     "GeoPoint",

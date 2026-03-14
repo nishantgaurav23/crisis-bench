@@ -1,0 +1,98 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "crisis-bench"
+version = "0.1.0"
+description = "Multi-agent disaster response coordination system with self-evolving India-specific benchmark"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.11"
+authors = [{ name = "Nishant Gaurav", email = "nishant@crisisben.ch" }]
+keywords = ["disaster-response", "multi-agent", "benchmark", "india", "llm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    # Web framework
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "websockets>=14.0",
+    # Database drivers
+    "asyncpg>=0.30.0",
+    "redis>=5.2.0",
+    "neo4j>=5.26.0",
+    "chromadb>=0.5.0",
+    # LLM (all providers via OpenAI-compatible client)
+    "openai>=1.60.0",
+    "langgraph>=0.2.0",
+    "langfuse>=2.50.0",
+    # HTTP + data parsing
+    "httpx>=0.28.0",
+    "feedparser>=6.0.0",
+    # Pydantic
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    # NLP
+    "transformers>=4.47.0",
+    "torch>=2.5.0",
+    "sentence-transformers>=3.3.0",
+    # Spatial
+    "geopandas>=1.0.0",
+    "shapely>=2.0.0",
+    "pyproj>=3.7.0",
+    # Optimization
+    "ortools>=9.11",
+    "pulp>=2.9.0",
+    # Monitoring + logging
+    "structlog>=24.4.0",
+    "prometheus-client>=0.21.0",
+    # Data processing
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "xarray>=2024.10.0",
+    "netCDF4>=1.7.0",
+    "imdlib>=0.1.0",
+    # PDF processing
+    "pymupdf>=1.25.0",
+    # MCP protocol
+    "mcp>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "hypothesis>=6.120.0",
+    "ruff>=0.8.0",
+    "pre-commit>=4.0.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]

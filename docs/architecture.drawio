@@ -1,0 +1,234 @@
+<mxfile host="app.diagrams.net" modified="2026-03-14T18:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram id="crisis-bench-arch" name="Architecture">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="CRISIS-BENCH Architecture" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=22;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="560" y="10" width="320" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Dashboard Layer -->
+        <mxCell id="dashboard" value="&lt;b&gt;Operations Dashboard&lt;/b&gt;&lt;br&gt;Next.js 14 + Leaflet/OSM&lt;br&gt;India-centered map&lt;br&gt;:3000" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;shadow=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="540" y="60" width="360" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- API Gateway -->
+        <mxCell id="api" value="&lt;b&gt;API Gateway&lt;/b&gt;&lt;br&gt;FastAPI + uvicorn&lt;br&gt;REST + WebSocket&lt;br&gt;:8000" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;shadow=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="440" y="180" width="560" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrow: Dashboard -> API -->
+        <mxCell id="e1" edge="1" source="dashboard" target="api" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Agent Platform -->
+        <mxCell id="agent_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="290" width="460" height="280" as="geometry"/>
+        </mxCell>
+        <mxCell id="agent_title" value="&lt;b&gt;Agent Platform (LangGraph)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="295" width="220" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Orchestrator -->
+        <mxCell id="orch" value="&lt;b&gt;Orchestrator&lt;/b&gt;&lt;br&gt;DeepSeek Reasoner&lt;br&gt;(critical tier)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="160" y="325" width="200" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Agents row 1 -->
+        <mxCell id="a1" value="Situation&lt;br&gt;Sense" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="55" y="395" width="95" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="a2" value="Predictive&lt;br&gt;Risk" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="160" y="395" width="95" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="a3" value="Resource&lt;br&gt;Allocation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="265" y="395" width="95" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="a4" value="Community&lt;br&gt;Comms" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="370" y="395" width="95" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Agents row 2 -->
+        <mxCell id="a5" value="Infrastructure&lt;br&gt;Status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="110" y="455" width="95" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="a6" value="Historical&lt;br&gt;Memory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="215" y="455" width="95" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="a7" value="Logistics&lt;br&gt;Optimizer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="320" y="455" width="95" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows from orch to agents -->
+        <mxCell id="ea1" edge="1" source="orch" target="a1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ea2" edge="1" source="orch" target="a2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ea3" edge="1" source="orch" target="a3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ea4" edge="1" source="orch" target="a4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Arrow: API -> Agent Platform -->
+        <mxCell id="e2" edge="1" source="api" target="agent_box" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Benchmark Engine -->
+        <mxCell id="bench_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="290" width="240" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="bench_title" value="&lt;b&gt;Benchmark Engine&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="295" width="140" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="b1" value="100 India Scenarios" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="545" y="325" width="120" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="b2" value="5 Evaluation Metrics&lt;br&gt;(LLM-as-Judge)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="545" y="370" width="120" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="b3" value="Self-Evolving&lt;br&gt;Generator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="545" y="420" width="120" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="b4" value="Simulated&lt;br&gt;Clock" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="680" y="325" width="75" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrow: API -> Benchmark -->
+        <mxCell id="e3" edge="1" source="api" target="bench_box" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Data Layer -->
+        <mxCell id="data_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;shadow=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="800" y="290" width="240" height="280" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_title" value="&lt;b&gt;Data Layer (Docker)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="845" y="295" width="150" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1" value="PostgreSQL 16&lt;br&gt;+ PostGIS 3.4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="815" y="325" width="105" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="d2" value="Neo4j&lt;br&gt;Community" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="925" y="325" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="d3" value="ChromaDB&lt;br&gt;(Vector Store)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="815" y="375" width="105" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="d4" value="Redis 7&lt;br&gt;Streams + Cache" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="925" y="375" width="100" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Monitoring sub-box -->
+        <mxCell id="d5" value="Prometheus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="815" y="430" width="100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="d6" value="Grafana" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="925" y="430" width="100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="d7" value="Langfuse" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="860" y="470" width="120" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrow: API -> Data -->
+        <mxCell id="e4" edge="1" source="api" target="data_box" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Redis Event Bus (central) -->
+        <mxCell id="redis_bus" value="&lt;b&gt;Redis Streams (Event Bus)&lt;/b&gt;&lt;br&gt;crisis:data:* | crisis:agent:* | crisis:eval:*" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="340" y="610" width="380" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows to Redis Bus -->
+        <mxCell id="e5" edge="1" source="agent_box" target="redis_bus" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" edge="1" source="bench_box" target="redis_bus" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" edge="1" source="data_box" target="redis_bus" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- MCP Servers -->
+        <mxCell id="mcp_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="700" width="330" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="mcp_title" value="&lt;b&gt;MCP Servers (India Data)&lt;/b&gt;&lt;br&gt;Anthropic MCP Protocol" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="95" y="705" width="220" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="m1" value="mcp-imd&lt;br&gt;IMD Weather" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="55" y="745" width="90" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="m2" value="mcp-sachet&lt;br&gt;NDMA Alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="155" y="745" width="90" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="m3" value="mcp-usgs&lt;br&gt;Earthquakes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="255" y="745" width="90" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="m4" value="mcp-osm&lt;br&gt;Infra Map" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="55" y="800" width="90" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="m5" value="mcp-bhuvan&lt;br&gt;ISRO Satellite" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="155" y="800" width="90" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="m6" value="mcp-firms&lt;br&gt;NASA Fire" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="255" y="800" width="90" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrow: Redis -> MCP -->
+        <mxCell id="e8" edge="1" source="redis_bus" target="mcp_box" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- LLM Router -->
+        <mxCell id="llm_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="700" width="320" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="llm_title" value="&lt;b&gt;LLM Router&lt;/b&gt;&lt;br&gt;5-Tier Routing | Auto-Failover" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="465" y="705" width="230" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="l1" value="&lt;b&gt;Critical&lt;/b&gt;&lt;br&gt;DeepSeek Reasoner&lt;br&gt;$0.50/M" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="430" y="745" width="95" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="l2" value="&lt;b&gt;Standard&lt;/b&gt;&lt;br&gt;DeepSeek Chat&lt;br&gt;$0.28/M" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="535" y="745" width="95" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="l3" value="&lt;b&gt;Routine&lt;/b&gt;&lt;br&gt;Qwen Flash&lt;br&gt;$0.04/M" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="640" y="745" width="90" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="l4" value="&lt;b&gt;Free&lt;/b&gt;&lt;br&gt;Groq + Gemini&lt;br&gt;$0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="460" y="800" width="95" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="l5" value="&lt;b&gt;Vision&lt;/b&gt;&lt;br&gt;Qwen VL Flash&lt;br&gt;$0.10/M" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="565" y="800" width="95" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrow: Redis -> LLM -->
+        <mxCell id="e9" edge="1" source="redis_bus" target="llm_box" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Ollama -->
+        <mxCell id="ollama_box" value="&lt;b&gt;Ollama (Local GPU)&lt;/b&gt;&lt;br&gt;Qwen2.5-7B (fallback)&lt;br&gt;nomic-embed-text (embeddings)&lt;br&gt;LLaVA (vision fallback)&lt;br&gt;:11434" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="790" y="710" width="230" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrow: LLM -> Ollama -->
+        <mxCell id="e10" value="fallback" style="endArrow=block;endFill=1;dashed=1;" edge="1" source="llm_box" target="ollama_box" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrow: Redis -> Ollama -->
+        <mxCell id="e11" edge="1" source="redis_bus" target="ollama_box" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- NLP Layer -->
+        <mxCell id="nlp_box" value="&lt;b&gt;Crisis NLP&lt;/b&gt;&lt;br&gt;CrisisBERT + IndicBERT&lt;br&gt;Bhashini + IndicTrans2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="790" y="820" width="230" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Protocols label -->
+        <mxCell id="proto_label" value="&lt;b&gt;Protocols:&lt;/b&gt; Google A2A (agent↔agent) | Anthropic MCP (agent↔tool)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="300" y="580" width="460" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Cost badge -->
+        <mxCell id="cost" value="&lt;b&gt;Total: $3-8/month&lt;/b&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#d5e8d4;strokeColor=#82b366;shadow=1;fontSize=13;fontStyle=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="60" width="170" height="50" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

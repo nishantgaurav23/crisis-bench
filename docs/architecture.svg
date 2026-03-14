@@ -1,0 +1,306 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 920" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="1" dy="1" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#666"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b85450"/>
+    </marker>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="920" fill="#fafafa" rx="12"/>
+
+  <!-- Title Bar -->
+  <rect x="0" y="0" width="1100" height="52" rx="12" fill="url(#headerGrad)"/>
+  <rect x="0" y="40" width="1100" height="12" fill="url(#headerGrad)"/>
+  <text x="550" y="34" text-anchor="middle" fill="white" font-size="20" font-weight="bold">CRISIS-BENCH  |  Multi-Agent Disaster Response System (India)</text>
+
+  <!-- Cost Badge -->
+  <rect x="940" y="62" width="145" height="34" rx="17" fill="#27ae60" filter="url(#shadow)"/>
+  <text x="1012" y="84" text-anchor="middle" fill="white" font-size="13" font-weight="bold">$3-8 / month</text>
+
+  <!-- ─── DASHBOARD ─── -->
+  <rect x="370" y="65" width="310" height="55" rx="10" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="525" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">Operations Dashboard</text>
+  <text x="525" y="104" text-anchor="middle" font-size="10" fill="#555">Next.js 14 + Leaflet/OSM  |  :3000</text>
+
+  <!-- Arrow: Dashboard -> API -->
+  <line x1="525" y1="120" x2="525" y2="138" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ─── API GATEWAY ─── -->
+  <rect x="200" y="140" width="650" height="48" rx="10" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="525" y="163" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">API Gateway  (FastAPI + uvicorn)</text>
+  <text x="525" y="178" text-anchor="middle" font-size="10" fill="#555">REST + WebSocket  |  :8000</text>
+
+  <!-- Arrows: API -> 3 columns -->
+  <line x1="350" y1="188" x2="220" y2="212" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="525" y1="188" x2="525" y2="212" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="700" y1="188" x2="830" y2="212" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ─── AGENT PLATFORM ─── -->
+  <rect x="30" y="215" width="370" height="280" rx="10" fill="#fff9e6" stroke="#d6b656" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="215" y="238" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">Agent Platform  (LangGraph)</text>
+
+  <!-- Orchestrator -->
+  <rect x="115" y="248" width="200" height="42" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+  <text x="215" y="267" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Orchestrator</text>
+  <text x="215" y="282" text-anchor="middle" font-size="9" fill="#666">DeepSeek Reasoner (critical)</text>
+
+  <!-- Agent cards -->
+  <!-- Row 1 -->
+  <rect x="42"  y="302" width="80" height="38" rx="6" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="82"  y="318" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Situation</text>
+  <text x="82"  y="330" text-anchor="middle" font-size="8" fill="#888">Sense</text>
+
+  <rect x="130" y="302" width="80" height="38" rx="6" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="170" y="318" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Predictive</text>
+  <text x="170" y="330" text-anchor="middle" font-size="8" fill="#888">Risk</text>
+
+  <rect x="218" y="302" width="80" height="38" rx="6" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="258" y="318" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Resource</text>
+  <text x="258" y="330" text-anchor="middle" font-size="8" fill="#888">Allocation</text>
+
+  <rect x="306" y="302" width="80" height="38" rx="6" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="346" y="318" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Community</text>
+  <text x="346" y="330" text-anchor="middle" font-size="8" fill="#888">Comms</text>
+
+  <!-- Row 2 -->
+  <rect x="75"  y="350" width="80" height="38" rx="6" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="115" y="366" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Infra</text>
+  <text x="115" y="378" text-anchor="middle" font-size="8" fill="#888">Status</text>
+
+  <rect x="163" y="350" width="80" height="38" rx="6" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="203" y="366" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Historical</text>
+  <text x="203" y="378" text-anchor="middle" font-size="8" fill="#888">Memory</text>
+
+  <rect x="251" y="350" width="80" height="38" rx="6" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="291" y="366" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Logistics</text>
+  <text x="291" y="378" text-anchor="middle" font-size="8" fill="#888">Optimizer</text>
+
+  <!-- Orchestrator arrows to agents -->
+  <line x1="165" y1="290" x2="82"  y2="302" stroke="#b85450" stroke-width="0.8" marker-end="url(#arrow-red)"/>
+  <line x1="190" y1="290" x2="170" y2="302" stroke="#b85450" stroke-width="0.8" marker-end="url(#arrow-red)"/>
+  <line x1="240" y1="290" x2="258" y2="302" stroke="#b85450" stroke-width="0.8" marker-end="url(#arrow-red)"/>
+  <line x1="265" y1="290" x2="346" y2="302" stroke="#b85450" stroke-width="0.8" marker-end="url(#arrow-red)"/>
+
+  <!-- Protocol labels inside agent box -->
+  <text x="215" y="410" text-anchor="middle" font-size="9" fill="#999">A2A Protocol (agent-to-agent)</text>
+
+  <!-- Google A2A badge -->
+  <rect x="70" y="430" width="120" height="22" rx="5" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="0.8"/>
+  <text x="130" y="445" text-anchor="middle" font-size="9" fill="#3949ab">Google A2A</text>
+
+  <!-- Anthropic MCP badge -->
+  <rect x="240" y="430" width="120" height="22" rx="5" fill="#fce4ec" stroke="#e57373" stroke-width="0.8"/>
+  <text x="300" y="445" text-anchor="middle" font-size="9" fill="#c62828">Anthropic MCP</text>
+
+  <!-- ─── BENCHMARK ENGINE ─── -->
+  <rect x="420" y="215" width="210" height="195" rx="10" fill="#f3e5f5" stroke="#9673a6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="525" y="238" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">Benchmark Engine</text>
+
+  <rect x="435" y="250" width="180" height="30" rx="6" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="525" y="270" text-anchor="middle" font-size="10" fill="#333">100 India-Specific Scenarios</text>
+
+  <rect x="435" y="288" width="180" height="30" rx="6" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="525" y="308" text-anchor="middle" font-size="10" fill="#333">5 Evaluation Metrics</text>
+
+  <rect x="435" y="326" width="180" height="30" rx="6" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="525" y="346" text-anchor="middle" font-size="10" fill="#333">Self-Evolving Generator</text>
+
+  <rect x="435" y="364" width="180" height="30" rx="6" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="525" y="384" text-anchor="middle" font-size="10" fill="#333">Simulated Clock Runner</text>
+
+  <!-- ─── DATA LAYER ─── -->
+  <rect x="660" y="215" width="420" height="280" rx="10" fill="#f5f5f5" stroke="#888" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="870" y="238" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">Data &amp; Infra Layer  (Docker Compose)</text>
+
+  <!-- DB cards -->
+  <rect x="675" y="250" width="125" height="38" rx="6" fill="#e3f2fd" stroke="#64b5f6"/>
+  <text x="737" y="266" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565c0">PostgreSQL 16</text>
+  <text x="737" y="280" text-anchor="middle" font-size="9" fill="#555">+ PostGIS 3.4</text>
+
+  <rect x="810" y="250" width="125" height="38" rx="6" fill="#e8f5e9" stroke="#66bb6a"/>
+  <text x="872" y="266" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">Neo4j</text>
+  <text x="872" y="280" text-anchor="middle" font-size="9" fill="#555">Community (Graph)</text>
+
+  <rect x="945" y="250" width="125" height="38" rx="6" fill="#fff3e0" stroke="#ffa726"/>
+  <text x="1007" y="266" text-anchor="middle" font-size="10" font-weight="bold" fill="#e65100">ChromaDB</text>
+  <text x="1007" y="280" text-anchor="middle" font-size="9" fill="#555">Vector Store</text>
+
+  <rect x="675" y="298" width="125" height="38" rx="6" fill="#ffebee" stroke="#ef5350"/>
+  <text x="737" y="314" text-anchor="middle" font-size="10" font-weight="bold" fill="#c62828">Redis 7</text>
+  <text x="737" y="328" text-anchor="middle" font-size="9" fill="#555">Streams + Cache</text>
+
+  <!-- Monitoring -->
+  <rect x="810" y="298" width="125" height="38" rx="6" fill="#fce4ec" stroke="#f48fb1"/>
+  <text x="872" y="314" text-anchor="middle" font-size="10" font-weight="bold" fill="#880e4f">Prometheus</text>
+  <text x="872" y="328" text-anchor="middle" font-size="9" fill="#555">Metrics :9090</text>
+
+  <rect x="945" y="298" width="125" height="38" rx="6" fill="#f3e5f5" stroke="#ce93d8"/>
+  <text x="1007" y="314" text-anchor="middle" font-size="10" font-weight="bold" fill="#6a1b9a">Grafana</text>
+  <text x="1007" y="328" text-anchor="middle" font-size="9" fill="#555">Dashboards :4001</text>
+
+  <rect x="810" y="346" width="260" height="32" rx="6" fill="#e0f2f1" stroke="#4db6ac"/>
+  <text x="940" y="367" text-anchor="middle" font-size="10" font-weight="bold" fill="#00695c">Langfuse (LLM Observability) :4000</text>
+
+  <!-- Ollama -->
+  <rect x="675" y="395" width="395" height="44" rx="6" fill="#efebe9" stroke="#8d6e63"/>
+  <text x="872" y="414" text-anchor="middle" font-size="10" font-weight="bold" fill="#4e342e">Ollama (Host GPU) :11434</text>
+  <text x="872" y="428" text-anchor="middle" font-size="9" fill="#666">Qwen2.5-7B (fallback)  |  nomic-embed-text (embeddings)  |  LLaVA (vision)</text>
+
+  <!-- NLP -->
+  <rect x="675" y="450" width="395" height="36" rx="6" fill="#ede7f6" stroke="#9575cd"/>
+  <text x="872" y="473" text-anchor="middle" font-size="10" font-weight="bold" fill="#4527a0">Crisis NLP:  CrisisBERT + IndicBERT  |  Bhashini + IndicTrans2</text>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ─── REDIS EVENT BUS ─── -->
+  <rect x="180" y="510" width="690" height="42" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2" filter="url(#shadow)"/>
+  <text x="525" y="530" text-anchor="middle" font-size="12" font-weight="bold" fill="#b85450">Redis Streams  (Event Bus)</text>
+  <text x="525" y="544" text-anchor="middle" font-size="9" fill="#777">crisis:data:imd | crisis:data:sachet | crisis:data:seismic | crisis:agent:tasks | crisis:eval:*</text>
+
+  <!-- Arrows to Event Bus -->
+  <line x1="215" y1="495" x2="350" y2="510" stroke="#b85450" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+  <line x1="525" y1="410" x2="525" y2="510" stroke="#b85450" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+  <line x1="870" y1="340" x2="700" y2="510" stroke="#b85450" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ─── MCP SERVERS ─── -->
+  <rect x="30" y="575" width="350" height="195" rx="10" fill="#e8f5e9" stroke="#66bb6a" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="205" y="598" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">MCP Data Servers (India)</text>
+  <text x="205" y="613" text-anchor="middle" font-size="9" fill="#777">Anthropic Model Context Protocol</text>
+
+  <!-- MCP cards -->
+  <rect x="42"  y="622" width="100" height="38" rx="5" fill="#c8e6c9" stroke="#43a047"/>
+  <text x="92"  y="638" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b5e20">mcp-imd</text>
+  <text x="92"  y="650" text-anchor="middle" font-size="8" fill="#555">IMD Weather</text>
+
+  <rect x="150" y="622" width="100" height="38" rx="5" fill="#c8e6c9" stroke="#43a047"/>
+  <text x="200" y="638" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b5e20">mcp-sachet</text>
+  <text x="200" y="650" text-anchor="middle" font-size="8" fill="#555">NDMA Alerts</text>
+
+  <rect x="258" y="622" width="100" height="38" rx="5" fill="#c8e6c9" stroke="#43a047"/>
+  <text x="308" y="638" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b5e20">mcp-usgs</text>
+  <text x="308" y="650" text-anchor="middle" font-size="8" fill="#555">Earthquakes</text>
+
+  <rect x="42"  y="668" width="100" height="38" rx="5" fill="#c8e6c9" stroke="#43a047"/>
+  <text x="92"  y="684" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b5e20">mcp-osm</text>
+  <text x="92"  y="696" text-anchor="middle" font-size="8" fill="#555">Infrastructure</text>
+
+  <rect x="150" y="668" width="100" height="38" rx="5" fill="#c8e6c9" stroke="#43a047"/>
+  <text x="200" y="684" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b5e20">mcp-bhuvan</text>
+  <text x="200" y="696" text-anchor="middle" font-size="8" fill="#555">ISRO Satellite</text>
+
+  <rect x="258" y="668" width="100" height="38" rx="5" fill="#c8e6c9" stroke="#43a047"/>
+  <text x="308" y="684" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b5e20">mcp-firms</text>
+  <text x="308" y="696" text-anchor="middle" font-size="8" fill="#555">NASA Fire</text>
+
+  <!-- Bhashini -->
+  <rect x="42" y="720" width="316" height="30" rx="5" fill="#b2dfdb" stroke="#26a69a"/>
+  <text x="200" y="740" text-anchor="middle" font-size="9" font-weight="bold" fill="#004d40">Bhashini API  (22 Indian Languages)  |  IndicTrans2</text>
+
+  <!-- Arrow: Event Bus -> MCP -->
+  <line x1="350" y1="552" x2="205" y2="575" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ─── LLM ROUTER ─── -->
+  <rect x="410" y="575" width="330" height="195" rx="10" fill="#e3f2fd" stroke="#42a5f5" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="575" y="598" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">LLM Router</text>
+  <text x="575" y="613" text-anchor="middle" font-size="9" fill="#777">5-Tier Routing  |  Auto-Failover  |  Cost Tracking</text>
+
+  <!-- LLM tier cards -->
+  <rect x="422" y="622" width="100" height="42" rx="5" fill="#ffcdd2" stroke="#e53935"/>
+  <text x="472" y="638" text-anchor="middle" font-size="9" font-weight="bold" fill="#b71c1c">Critical</text>
+  <text x="472" y="652" text-anchor="middle" font-size="8" fill="#555">DeepSeek Reasoner</text>
+
+  <rect x="528" y="622" width="100" height="42" rx="5" fill="#fff9c4" stroke="#fbc02d"/>
+  <text x="578" y="638" text-anchor="middle" font-size="9" font-weight="bold" fill="#f57f17">Standard</text>
+  <text x="578" y="652" text-anchor="middle" font-size="8" fill="#555">DeepSeek Chat</text>
+
+  <rect x="634" y="622" width="100" height="42" rx="5" fill="#c8e6c9" stroke="#43a047"/>
+  <text x="684" y="638" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b5e20">Routine</text>
+  <text x="684" y="652" text-anchor="middle" font-size="8" fill="#555">Qwen Flash</text>
+
+  <rect x="422" y="672" width="100" height="42" rx="5" fill="#c8e6c9" stroke="#43a047"/>
+  <text x="472" y="688" text-anchor="middle" font-size="9" font-weight="bold" fill="#1b5e20">Free</text>
+  <text x="472" y="702" text-anchor="middle" font-size="8" fill="#555">Groq + Gemini</text>
+
+  <rect x="528" y="672" width="100" height="42" rx="5" fill="#bbdefb" stroke="#1e88e5"/>
+  <text x="578" y="688" text-anchor="middle" font-size="9" font-weight="bold" fill="#0d47a1">Vision</text>
+  <text x="578" y="702" text-anchor="middle" font-size="8" fill="#555">Qwen VL Flash</text>
+
+  <!-- Fallback arrow label -->
+  <rect x="634" y="678" width="100" height="28" rx="5" fill="#efebe9" stroke="#8d6e63" stroke-dasharray="3"/>
+  <text x="684" y="696" text-anchor="middle" font-size="9" fill="#5d4037">Ollama fallback</text>
+
+  <!-- Fallback chain -->
+  <text x="575" y="755" text-anchor="middle" font-size="9" fill="#999">DeepSeek API  -->  Qwen API  -->  Groq free  -->  Gemini free  -->  Ollama local</text>
+
+  <!-- Arrow: Event Bus -> LLM -->
+  <line x1="525" y1="552" x2="575" y2="575" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ─── EXTERNAL APIs (bottom) ─── -->
+  <rect x="770" y="575" width="310" height="195" rx="10" fill="#fff8e1" stroke="#ffb300" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="925" y="598" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">External API Providers</text>
+
+  <rect x="785" y="612" width="135" height="28" rx="5" fill="#e3f2fd" stroke="#42a5f5"/>
+  <text x="852" y="631" text-anchor="middle" font-size="9" fill="#1565c0">DeepSeek API ($0.28-0.50/M)</text>
+
+  <rect x="930" y="612" width="135" height="28" rx="5" fill="#e8f5e9" stroke="#66bb6a"/>
+  <text x="997" y="631" text-anchor="middle" font-size="9" fill="#2e7d32">Qwen/Alibaba ($0.04/M)</text>
+
+  <rect x="785" y="648" width="135" height="28" rx="5" fill="#fff3e0" stroke="#ffa726"/>
+  <text x="852" y="667" text-anchor="middle" font-size="9" fill="#e65100">Groq (Llama-70B, free)</text>
+
+  <rect x="930" y="648" width="135" height="28" rx="5" fill="#e0f2f1" stroke="#4db6ac"/>
+  <text x="997" y="667" text-anchor="middle" font-size="9" fill="#00695c">Gemini Flash (free)</text>
+
+  <rect x="785" y="684" width="135" height="28" rx="5" fill="#fce4ec" stroke="#f48fb1"/>
+  <text x="852" y="703" text-anchor="middle" font-size="9" fill="#880e4f">Kimi K2.5 ($0.45/M)</text>
+
+  <rect x="930" y="684" width="135" height="28" rx="5" fill="#ede7f6" stroke="#9575cd"/>
+  <text x="997" y="703" text-anchor="middle" font-size="9" fill="#4527a0">Ollama Local ($0)</text>
+
+  <!-- Indian Data Sources -->
+  <text x="925" y="730" text-anchor="middle" font-size="10" font-weight="bold" fill="#666">Indian Government Sources</text>
+  <text x="925" y="748" text-anchor="middle" font-size="9" fill="#888">IMD | NDMA SACHET | ISRO Bhuvan | Census 2011 | CWC</text>
+  <text x="925" y="762" text-anchor="middle" font-size="9" fill="#888">USGS | NASA FIRMS | OpenStreetMap (supplementary)</text>
+
+  <!-- Arrow: LLM -> External -->
+  <line x1="740" y1="672" x2="770" y2="672" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- Legend -->
+  <rect x="30" y="815" width="1040" height="90" rx="8" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="550" y="838" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Tech Stack Summary</text>
+
+  <rect x="50" y="850" width="12" height="12" rx="2" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="70" y="861" font-size="10" fill="#555">LangGraph Agents</text>
+
+  <rect x="185" y="850" width="12" height="12" rx="2" fill="#dae8fc" stroke="#6c8ebf"/>
+  <text x="205" y="861" font-size="10" fill="#555">Dashboard/UI</text>
+
+  <rect x="300" y="850" width="12" height="12" rx="2" fill="#d5e8d4" stroke="#82b366"/>
+  <text x="320" y="861" font-size="10" fill="#555">API/MCP Layer</text>
+
+  <rect x="420" y="850" width="12" height="12" rx="2" fill="#f8cecc" stroke="#b85450"/>
+  <text x="440" y="861" font-size="10" fill="#555">Event Bus (Redis)</text>
+
+  <rect x="560" y="850" width="12" height="12" rx="2" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="580" y="861" font-size="10" fill="#555">Benchmark</text>
+
+  <rect x="660" y="850" width="12" height="12" rx="2" fill="#f5f5f5" stroke="#888"/>
+  <text x="680" y="861" font-size="10" fill="#555">Data/Infra</text>
+
+  <text x="50" y="890" font-size="10" fill="#999">Python 3.11+ | FastAPI | LangGraph 0.2+ | Docker Compose | PostgreSQL+PostGIS | Neo4j | ChromaDB | Redis Streams | Next.js 14 | Leaflet/OSM</text>
+  <text x="950" y="890" font-size="10" fill="#999">github.com/nishantgaurav23</text>
+</svg>

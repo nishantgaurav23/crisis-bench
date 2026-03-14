@@ -1,0 +1,153 @@
+# CRISIS-BENCH: Docker Compose — All Infrastructure Services
+# Usage: docker-compose up -d
+# Requires: .env file (cp .env.example .env)
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: crisis-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=crisis
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=crisis_bench
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init_langfuse_db.sh:/docker-entrypoint-initdb.d/init_langfuse_db.sh
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crisis"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - crisis-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: crisis-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - crisis-net
+
+  neo4j:
+    image: neo4j:5-community
+    container_name: crisis-neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD}
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - crisis-net
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: crisis-chromadb
+    ports:
+      - "8100:8000"
+    environment:
+      - ANONYMIZED_TELEMETRY=false
+    volumes:
+      - chroma_data:/chroma/chroma
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/v1/heartbeat || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - crisis-net
+
+  langfuse:
+    image: langfuse/langfuse:2
+    container_name: crisis-langfuse
+    ports:
+      - "4000:3000"
+    environment:
+      - DATABASE_URL=postgresql://crisis:${POSTGRES_PASSWORD}@postgres:5432/langfuse
+      - NEXTAUTH_SECRET=${LANGFUSE_SECRET}
+      - SALT=${LANGFUSE_SALT}
+      - NEXTAUTH_URL=http://localhost:4000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/public/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - crisis-net
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: crisis-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:9090/-/healthy || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - crisis-net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: crisis-grafana
+    ports:
+      - "4001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SERVER_HTTP_PORT=3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      prometheus:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - crisis-net
+
+volumes:
+  postgres_data:
+  redis_data:
+  neo4j_data:
+  chroma_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  crisis-net:
+    driver: bridge

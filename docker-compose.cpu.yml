@@ -1,0 +1,10 @@
+# CRISIS-BENCH: CPU-only override (no GPU)
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.cpu.yml up -d
+
+services:
+  postgres:
+    environment:
+      - OLLAMA_HOST=http://host.docker.internal:11434
+  redis:
+    environment:
+      - OLLAMA_HOST=http://host.docker.internal:11434

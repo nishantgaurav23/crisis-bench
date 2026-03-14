@@ -1,0 +1,70 @@
+# Environment secrets
+.env
+
+# Large data files (~17GB)
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Linting
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker volumes
+pgdata/
+redisdata/
+neo4jdata/
+chromadata/
+
+# Ollama models (run on host)
+.ollama/
+
+# Node (dashboard)
+node_modules/
+.next/
+dashboard/.next/
+dashboard/node_modules/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Misc
+*.log
+*.tmp
+
+# Design docs (kept locally, not in repo)
+requirements.md
+research_brief.md
+design.md
+requirements (2).md
+research_brief (1).md
+design (2).md
+spec-driven-development-prompt.md

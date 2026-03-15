@@ -193,12 +193,12 @@ A: All agents run on the same machine. HTTP would add unnecessary serialization,
 
 | Spec | Spec Location | Depends On | Location | Feature | Notes | Status |
 |------|--------------|------------|----------|---------|-------|--------|
-| S5.1 | `specs/spec-S5.1-mcp-imd/` | S4.4 | `src/protocols/mcp/imd_server.py` | IMD Weather MCP server | District warnings, rainfall, cyclone info, AWS data | pending |
-| S5.2 | `specs/spec-S5.2-mcp-sachet/` | S4.4 | `src/protocols/mcp/sachet_server.py` | SACHET CAP Feed MCP server | Parse CAP XML, filter by state/hazard type, 7 agency alerts | pending |
-| S5.3 | `specs/spec-S5.3-mcp-usgs/` | S4.4 | `src/protocols/mcp/usgs_server.py` | USGS Earthquake MCP server | FDSNWS API, India region filter, magnitude/depth queries | pending |
-| S5.4 | `specs/spec-S5.4-mcp-osm/` | S4.4 | `src/protocols/mcp/osm_server.py` | OpenStreetMap Overpass MCP server | Infrastructure queries, hospital/shelter/road data for India | pending |
-| S5.5 | `specs/spec-S5.5-mcp-bhuvan/` | S4.4 | `src/protocols/mcp/bhuvan_server.py` | ISRO Bhuvan MCP server | Village geocoding, satellite layers, LULC, NDEM flood maps | pending |
-| S5.6 | `specs/spec-S5.6-mcp-firms/` | S4.4 | `src/protocols/mcp/firms_server.py` | NASA FIRMS Fire MCP server | Active fire data, India region, thermal anomalies | pending |
+| S5.1 | `specs/spec-S5.1-mcp-imd/` | S4.4 | `src/protocols/mcp/imd_server.py` | IMD Weather MCP server | District warnings, rainfall, cyclone info, AWS data | done |
+| S5.2 | `specs/spec-S5.2-mcp-sachet/` | S4.4 | `src/protocols/mcp/sachet_server.py` | SACHET CAP Feed MCP server | Parse CAP XML, filter by state/hazard type, 7 agency alerts | done |
+| S5.3 | `specs/spec-S5.3-mcp-usgs/` | S4.4 | `src/protocols/mcp/usgs_server.py` | USGS Earthquake MCP server | FDSNWS API, India region filter, magnitude/depth queries | done |
+| S5.4 | `specs/spec-S5.4-mcp-osm/` | S4.4 | `src/protocols/mcp/osm_server.py` | OpenStreetMap Overpass MCP server | Infrastructure queries, hospital/shelter/road data for India | done |
+| S5.5 | `specs/spec-S5.5-mcp-bhuvan/` | S4.4 | `src/protocols/mcp/bhuvan_server.py` | ISRO Bhuvan MCP server | Village geocoding, satellite layers, LULC, NDEM flood maps | done |
+| S5.6 | `specs/spec-S5.6-mcp-firms/` | S4.4 | `src/protocols/mcp/firms_server.py` | NASA FIRMS Fire MCP server | Active fire data, India region, thermal anomalies | done |
 
 ### Interview Q&A — Phase 5
 
@@ -358,12 +358,12 @@ A: Oracle's Always Free tier is genuinely permanent — 4 ARM Ampere cores, 24GB
 | S4.2 | A2A server (Redis Streams) | 4 | S4.1, S2.3 | done |
 | S4.3 | A2A client (Redis Streams) | 4 | S4.1, S2.3 | done |
 | S4.4 | MCP server base framework | 4 | S1.3 | done |
-| S5.1 | MCP: IMD Weather | 5 | S4.4 | pending |
-| S5.2 | MCP: SACHET CAP Feed | 5 | S4.4 | pending |
-| S5.3 | MCP: USGS Earthquakes | 5 | S4.4 | pending |
-| S5.4 | MCP: OSM Overpass | 5 | S4.4 | pending |
-| S5.5 | MCP: ISRO Bhuvan | 5 | S4.4 | pending |
-| S5.6 | MCP: NASA FIRMS Fire | 5 | S4.4 | pending |
+| S5.1 | MCP: IMD Weather | 5 | S4.4 | done |
+| S5.2 | MCP: SACHET CAP Feed | 5 | S4.4 | done |
+| S5.3 | MCP: USGS Earthquakes | 5 | S4.4 | done |
+| S5.4 | MCP: OSM Overpass | 5 | S4.4 | done |
+| S5.5 | MCP: ISRO Bhuvan | 5 | S4.4 | done |
+| S5.6 | MCP: NASA FIRMS Fire | 5 | S4.4 | done |
 | S6.1 | ChromaDB setup + embedding pipeline | 6 | S1.3 | pending |
 | S6.2 | NDMA guidelines ingestion | 6 | S6.1 | pending |
 | S6.3 | Neo4j infrastructure graph | 6 | S1.3 | pending |

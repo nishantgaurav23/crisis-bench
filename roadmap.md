@@ -168,10 +168,10 @@ A: Visual feedback accelerates development. When you can see agent status, disas
 
 | Spec | Spec Location | Depends On | Location | Feature | Notes | Status |
 |------|--------------|------------|----------|---------|-------|--------|
-| S4.1 | `specs/spec-S4.1-a2a-schemas/` | S2.1, S2.4 | `src/protocols/a2a/schemas.py` | A2A message schemas | Task, TaskResult, AgentCard, Artifact models per A2A spec | pending |
-| S4.2 | `specs/spec-S4.2-a2a-server/` | S4.1, S2.3 | `src/protocols/a2a/server.py` | A2A server (Redis Streams publisher) | Publish tasks, broadcast updates, consumer group management | pending |
-| S4.3 | `specs/spec-S4.3-a2a-client/` | S4.1, S2.3 | `src/protocols/a2a/client.py` | A2A client (Redis Streams subscriber) | Subscribe to tasks, send responses, acknowledgment | pending |
-| S4.4 | `specs/spec-S4.4-mcp-base/` | S1.3 | `src/protocols/mcp/base.py` | MCP server base framework | Common MCP server setup, tool registration, error handling | pending |
+| S4.1 | `specs/spec-S4.1-a2a-schemas/` | S2.1, S2.4 | `src/protocols/a2a/schemas.py` | A2A message schemas | Task, TaskResult, AgentCard, Artifact models per A2A spec | done |
+| S4.2 | `specs/spec-S4.2-a2a-server/` | S4.1, S2.3 | `src/protocols/a2a/server.py` | A2A server (Redis Streams publisher) | Publish tasks, broadcast updates, consumer group management | done |
+| S4.3 | `specs/spec-S4.3-a2a-client/` | S4.1, S2.3 | `src/protocols/a2a/client.py` | A2A client (Redis Streams subscriber) | Subscribe to tasks, send responses, acknowledgment | done |
+| S4.4 | `specs/spec-S4.4-mcp-base/` | S1.3 | `src/protocols/mcp/base.py` | MCP server base framework | Common MCP server setup, tool registration, error handling | done |
 
 ### Interview Q&A — Phase 4
 
@@ -354,10 +354,10 @@ A: Oracle's Always Free tier is genuinely permanent — 4 ARM Ampere cores, 24GB
 | S3.5 | Agent status panel | 3 | S3.3 | done |
 | S3.6 | Metrics panel (cost/tokens) | 3 | S3.3 | done |
 | S3.7 | Timeline component | 3 | S3.3 | done |
-| S4.1 | A2A message schemas | 4 | S2.1, S2.4 | pending |
-| S4.2 | A2A server (Redis Streams) | 4 | S4.1, S2.3 | pending |
-| S4.3 | A2A client (Redis Streams) | 4 | S4.1, S2.3 | pending |
-| S4.4 | MCP server base framework | 4 | S1.3 | pending |
+| S4.1 | A2A message schemas | 4 | S2.1, S2.4 | done |
+| S4.2 | A2A server (Redis Streams) | 4 | S4.1, S2.3 | done |
+| S4.3 | A2A client (Redis Streams) | 4 | S4.1, S2.3 | done |
+| S4.4 | MCP server base framework | 4 | S1.3 | done |
 | S5.1 | MCP: IMD Weather | 5 | S4.4 | pending |
 | S5.2 | MCP: SACHET CAP Feed | 5 | S4.4 | pending |
 | S5.3 | MCP: USGS Earthquakes | 5 | S4.4 | pending |

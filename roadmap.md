@@ -137,13 +137,13 @@ A: `structlog` produces structured JSON logs — each log entry is a JSON object
 
 | Spec | Spec Location | Depends On | Location | Feature | Notes | Status |
 |------|--------------|------------|----------|---------|-------|--------|
-| S3.1 | `specs/spec-S3.1-api-gateway/` | S1.3, S2.1, S2.4 | `src/api/main.py`, `src/api/routes/` | FastAPI gateway | Health, disaster CRUD, agent status endpoints, CORS | pending |
-| S3.2 | `specs/spec-S3.2-websocket/` | S3.1, S2.3 | `src/api/websocket.py` | WebSocket server | Real-time agent updates, disaster events to dashboard | pending |
-| S3.3 | `specs/spec-S3.3-dashboard-setup/` | — | `dashboard/` | Next.js 14 project setup | TypeScript, Tailwind CSS, project scaffold, Dockerfile | pending |
-| S3.4 | `specs/spec-S3.4-geo-map/` | S3.3 | `dashboard/src/components/GeoMap.tsx` | India-centered Leaflet map | State/district boundaries, disaster markers, flood zones | pending |
-| S3.5 | `specs/spec-S3.5-agent-panel/` | S3.3 | `dashboard/src/components/AgentFlow.tsx` | Agent status + communication flow | 7 agents displayed, message flow visualization, mock data initially | pending |
-| S3.6 | `specs/spec-S3.6-metrics-panel/` | S3.3 | `dashboard/src/components/MetricsPanel.tsx` | Token usage + cost tracking panel | Per-provider breakdown, budget gauge, latency charts | pending |
-| S3.7 | `specs/spec-S3.7-timeline/` | S3.3 | `dashboard/src/components/Timeline.tsx` | Event timeline component | Chronological agent decisions, disaster phase transitions | pending |
+| S3.1 | `specs/spec-S3.1-api-gateway/` | S1.3, S2.1, S2.4 | `src/api/main.py`, `src/api/routes/` | FastAPI gateway | Health, disaster CRUD, agent status endpoints, CORS | done |
+| S3.2 | `specs/spec-S3.2-websocket/` | S3.1, S2.3 | `src/api/websocket.py` | WebSocket server | Real-time agent updates, disaster events to dashboard | done |
+| S3.3 | `specs/spec-S3.3-dashboard-setup/` | — | `dashboard/` | Next.js 14 project setup | TypeScript, Tailwind CSS, project scaffold, Dockerfile | done |
+| S3.4 | `specs/spec-S3.4-geo-map/` | S3.3 | `dashboard/src/components/GeoMap.tsx` | India-centered Leaflet map | State/district boundaries, disaster markers, flood zones | done |
+| S3.5 | `specs/spec-S3.5-agent-panel/` | S3.3 | `dashboard/src/components/AgentFlow.tsx` | Agent status + communication flow | 7 agents displayed, message flow visualization, mock data initially | done |
+| S3.6 | `specs/spec-S3.6-metrics-panel/` | S3.3 | `dashboard/src/components/MetricsPanel.tsx` | Token usage + cost tracking panel | Per-provider breakdown, budget gauge, latency charts | done |
+| S3.7 | `specs/spec-S3.7-timeline/` | S3.3 | `dashboard/src/components/Timeline.tsx` | Event timeline component | Chronological agent decisions, disaster phase transitions | done |
 
 ### Interview Q&A — Phase 3
 
@@ -347,13 +347,13 @@ A: Oracle's Always Free tier is genuinely permanent — 4 ARM Ampere cores, 24GB
 | S2.6 | LLM Router (5-tier multi-provider) | 2 | S1.3, S2.4, S2.5 | done |
 | S2.7 | Urgency classifier | 2 | S2.6 | done |
 | S2.8 | Cost tracker | 2 | S2.6 | pending |
-| S3.1 | FastAPI gateway | 3 | S1.3, S2.1, S2.4 | pending |
-| S3.2 | WebSocket server | 3 | S3.1, S2.3 | pending |
-| S3.3 | Next.js dashboard setup | 3 | — | pending |
-| S3.4 | India-centered Leaflet map | 3 | S3.3 | pending |
-| S3.5 | Agent status panel | 3 | S3.3 | pending |
-| S3.6 | Metrics panel (cost/tokens) | 3 | S3.3 | pending |
-| S3.7 | Timeline component | 3 | S3.3 | pending |
+| S3.1 | FastAPI gateway | 3 | S1.3, S2.1, S2.4 | done |
+| S3.2 | WebSocket server | 3 | S3.1, S2.3 | done |
+| S3.3 | Next.js dashboard setup | 3 | — | done |
+| S3.4 | India-centered Leaflet map | 3 | S3.3 | done |
+| S3.5 | Agent status panel | 3 | S3.3 | done |
+| S3.6 | Metrics panel (cost/tokens) | 3 | S3.3 | done |
+| S3.7 | Timeline component | 3 | S3.3 | done |
 | S4.1 | A2A message schemas | 4 | S2.1, S2.4 | pending |
 | S4.2 | A2A server (Redis Streams) | 4 | S4.1, S2.3 | pending |
 | S4.3 | A2A client (Redis Streams) | 4 | S4.1, S2.3 | pending |

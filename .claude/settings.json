@@ -1,23 +1,25 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python*)",
-      "Bash(uv *)",
-      "Bash(pytest*)",
-      "Bash(ruff *)",
-      "Bash(mkdir *)",
-      "Bash(ls *)",
-      "Bash(cat *)",
-      "Bash(git *)",
-      "Bash(cd *)",
-      "Bash(touch *)",
+      "Bash(*)",
       "Read",
       "Write",
       "Edit",
       "Glob",
       "Grep",
       "Skill",
-      "Agent"
+      "Agent",
+      "WebFetch",
+      "WebSearch",
+      "mcp__ide__executeCode",
+      "mcp__ide__getDiagnostics",
+      "NotebookEdit",
+      "TaskCreate",
+      "TaskGet",
+      "TaskList",
+      "TaskOutput",
+      "TaskStop",
+      "TaskUpdate"
     ]
   }
 }

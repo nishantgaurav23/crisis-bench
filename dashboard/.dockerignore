@@ -1,0 +1,7 @@
+node_modules
+.next
+.env.local
+*.md
+src/__tests__
+jest.config.js
+jest.setup.ts

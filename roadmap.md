@@ -313,12 +313,12 @@ A: Perturbation ops create scenario variants by systematically modifying paramet
 
 | Spec | Spec Location | Depends On | Location | Feature | Notes | Status |
 |------|--------------|------------|----------|---------|-------|--------|
-| S9.1 | `specs/spec-S9.1-plan-caching/` | S6.1, S7.9 | `src/caching/plan_cache.py`, `src/caching/plan_adapter.py` | Agentic Plan Caching | ChromaDB similarity search for recurring scenarios, >20% latency reduction | pending |
-| S9.2 | `specs/spec-S9.2-dashboard-integration/` | S3.4-S3.7, S7.9, S8.4 | `dashboard/src/`, `src/api/routes/` | Dashboard full data integration | Live agent data → map, real benchmark metrics, scenario replay UI | pending |
-| S9.3 | `specs/spec-S9.3-langfuse-integration/` | S2.5, S7.1 | `src/shared/telemetry.py` | Langfuse full integration | All LLM calls traced, cost attribution, prompt versioning | pending |
-| S9.4 | `specs/spec-S9.4-grafana-dashboards/` | S2.5 | `monitoring/` | Prometheus + Grafana dashboards | tokens_per_agent, cost_per_provider, latency, cache_hit_rate, budget alerts | pending |
-| S9.5 | `specs/spec-S9.5-ci-cd/` | S1.5 | `.github/workflows/` | GitHub Actions CI/CD | Lint, test, benchmark regression on PR, Docker build | pending |
-| S9.6 | `specs/spec-S9.6-deployment/` | S1.2 | `docker/`, scripts | Oracle Cloud Always Free deployment | ARM64 Docker images, setup script, health monitoring | pending |
+| S9.1 | `specs/spec-S9.1-plan-caching/` | S6.1, S7.9 | `src/caching/plan_cache.py`, `src/caching/plan_adapter.py` | Agentic Plan Caching | ChromaDB similarity search for recurring scenarios, >20% latency reduction | done |
+| S9.2 | `specs/spec-S9.2-dashboard-integration/` | S3.4-S3.7, S7.9, S8.4 | `dashboard/src/`, `src/api/routes/` | Dashboard full data integration | Live agent data → map, real benchmark metrics, scenario replay UI | done |
+| S9.3 | `specs/spec-S9.3-langfuse-integration/` | S2.5, S7.1 | `src/shared/telemetry.py` | Langfuse full integration | All LLM calls traced, cost attribution, prompt versioning | done |
+| S9.4 | `specs/spec-S9.4-grafana-dashboards/` | S2.5 | `monitoring/` | Prometheus + Grafana dashboards | tokens_per_agent, cost_per_provider, latency, cache_hit_rate, budget alerts | done |
+| S9.5 | `specs/spec-S9.5-ci-cd/` | S1.5 | `.github/workflows/` | GitHub Actions CI/CD | Lint, test, benchmark regression on PR, Docker build | done |
+| S9.6 | `specs/spec-S9.6-deployment/` | S1.2 | `docker/`, scripts | Oracle Cloud Always Free deployment | ARM64 Docker images, setup script, health monitoring | done |
 
 ### Interview Q&A — Phase 9
 
@@ -391,12 +391,12 @@ A: Oracle's Always Free tier is genuinely permanent — 4 ARM Ampere cores, 24GB
 | S8.9 | Metric: Communication Appropriateness | 8 | S8.4 | done |
 | S8.10 | Aggregate DRS scoring | 8 | S8.5-S8.9 | done |
 | S8.11 | Self-evolving generator | 8 | S8.2, S6.6 | done |
-| S9.1 | Agentic Plan Caching | 9 | S6.1, S7.9 | pending |
-| S9.2 | Dashboard full integration | 9 | S3.4-S3.7, S7.9, S8.4 | pending |
-| S9.3 | Langfuse full integration | 9 | S2.5, S7.1 | pending |
-| S9.4 | Grafana dashboards | 9 | S2.5 | pending |
-| S9.5 | CI/CD (GitHub Actions) | 9 | S1.5 | pending |
-| S9.6 | Oracle Cloud deployment | 9 | S1.2 | pending |
+| S9.1 | Agentic Plan Caching | 9 | S6.1, S7.9 | done |
+| S9.2 | Dashboard full integration | 9 | S3.4-S3.7, S7.9, S8.4 | done |
+| S9.3 | Langfuse full integration | 9 | S2.5, S7.1 | done |
+| S9.4 | Grafana dashboards | 9 | S2.5 | done |
+| S9.5 | CI/CD (GitHub Actions) | 9 | S1.5 | done |
+| S9.6 | Oracle Cloud deployment | 9 | S1.2 | done |
 
 **Total: 55 specs across 9 phases**
 

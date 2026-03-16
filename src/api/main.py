@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 
 from src.shared.errors import CrisisError
 
-from .routes import agents, disasters, health
+from .routes import agents, benchmark, disasters, health, metrics
 from .websocket import websocket_endpoint
 
 
@@ -48,6 +48,8 @@ def create_app() -> FastAPI:
     app.include_router(health.router)
     app.include_router(disasters.router)
     app.include_router(agents.router)
+    app.include_router(benchmark.router)
+    app.include_router(metrics.router)
 
     # WebSocket
     app.add_api_websocket_route("/ws", websocket_endpoint)

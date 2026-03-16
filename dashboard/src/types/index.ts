@@ -112,3 +112,31 @@ export interface ApiError {
   detail: string;
   trace_id?: string;
 }
+
+// Benchmark types
+
+export interface ScenarioSummary {
+  id: string;
+  category: string;
+  complexity: string;
+  affected_states: string[];
+  event_count: number;
+  source: string;
+  created_at: string;
+}
+
+export interface EvaluationRunSummary {
+  id: string;
+  scenario_id: string;
+  situational_accuracy: number | null;
+  decision_timeliness: number | null;
+  resource_efficiency: number | null;
+  coordination_quality: number | null;
+  communication_score: number | null;
+  aggregate_drs: number | null;
+  total_tokens: number | null;
+  total_cost_usd: number | null;
+  primary_provider: string | null;
+  duration_seconds: number | null;
+  completed_at: string;
+}

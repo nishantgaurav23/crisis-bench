@@ -1,0 +1,51 @@
+# ── Stage 1: Dependencies ──────────────────────────────────────────────
+FROM python:3.11-slim AS deps
+
+WORKDIR /app
+
+# Install system dependencies for asyncpg, PostGIS bindings
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc libpq-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy dependency files first for layer caching
+COPY pyproject.toml ./
+COPY uv.lock* ./
+
+# Install uv and project dependencies
+RUN pip install --no-cache-dir uv && \
+    uv sync --no-dev --no-install-project
+
+# ── Stage 2: Runtime ──────────────────────────────────────────────────
+FROM python:3.11-slim AS runtime
+
+WORKDIR /app
+
+# Install runtime system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create non-root user
+RUN groupadd --system --gid 1001 crisis && \
+    useradd --system --uid 1001 --gid crisis crisis
+
+# Copy installed dependencies from deps stage
+COPY --from=deps /app/.venv /app/.venv
+ENV PATH="/app/.venv/bin:$PATH"
+
+# Copy application source
+COPY src/ ./src/
+COPY scripts/ ./scripts/
+
+# Set ownership
+RUN chown -R crisis:crisis /app
+
+USER crisis
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+CMD ["uvicorn", "src.api.main:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]

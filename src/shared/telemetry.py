@@ -147,9 +147,11 @@ TraceHandle = Any
 
 
 class LangfuseTracer:
-    """Thin wrapper around Langfuse for LLM observability.
+    """Full Langfuse integration for LLM observability.
 
-    Degrades gracefully to no-op when Langfuse is unreachable.
+    Supports hierarchical tracing (trace → span → generation), prompt versioning,
+    session grouping, and cost attribution. Degrades gracefully to no-op when
+    Langfuse is unreachable.
     """
 
     def __init__(self, settings: CrisisSettings) -> None:
@@ -168,25 +170,47 @@ class LangfuseTracer:
             logger = get_logger("telemetry.langfuse")
             logger.warning("langfuse_unavailable", host=settings.LANGFUSE_HOST)
 
+    # -----------------------------------------------------------------
+    # Traces
+    # -----------------------------------------------------------------
+
     def start_trace(
         self,
         name: str,
         *,
         agent_id: str = "",
         trace_id: str = "",
+        session_id: str = "",
         metadata: dict[str, Any] | None = None,
     ) -> TraceHandle:
-        """Start a Langfuse trace. Returns handle or None if disabled."""
+        """Start a Langfuse trace (top-level unit of work).
+
+        Args:
+            name: Trace name (e.g., "task:situation_analysis").
+            agent_id: Agent creating the trace.
+            trace_id: Application-level trace ID.
+            session_id: Session ID for grouping (e.g., benchmark scenario run).
+            metadata: Additional metadata dict.
+
+        Returns:
+            Trace handle, or None if disabled/error.
+        """
         if not self.enabled or self._client is None:
             return None
-        return self._client.trace(
-            name=name,
-            metadata={
-                "agent_id": agent_id,
-                "trace_id": trace_id,
-                **(metadata or {}),
-            },
-        )
+        try:
+            kwargs: dict[str, Any] = {
+                "name": name,
+                "metadata": {
+                    "agent_id": agent_id,
+                    "trace_id": trace_id,
+                    **(metadata or {}),
+                },
+            }
+            if session_id:
+                kwargs["session_id"] = session_id
+            return self._client.trace(**kwargs)
+        except Exception:
+            return None
 
     def end_trace(
         self,
@@ -198,7 +222,106 @@ class LangfuseTracer:
         """Complete a trace."""
         if handle is None or not self.enabled:
             return
-        handle.update(output=output, metadata={"status": status})
+        try:
+            handle.update(output=output, metadata={"status": status})
+        except Exception:
+            pass
+
+    # -----------------------------------------------------------------
+    # Spans (sub-operations within a trace)
+    # -----------------------------------------------------------------
+
+    def start_span(
+        self,
+        trace_handle: TraceHandle,
+        name: str,
+        *,
+        metadata: dict[str, Any] | None = None,
+    ) -> TraceHandle:
+        """Start a span as a child of a trace or another span.
+
+        Args:
+            trace_handle: Parent trace/span handle.
+            name: Span name (e.g., "graph_node:analyze").
+            metadata: Additional metadata.
+
+        Returns:
+            Span handle, or None if disabled/error.
+        """
+        if trace_handle is None or not self.enabled:
+            return None
+        try:
+            return trace_handle.span(name=name, metadata=metadata or {})
+        except Exception:
+            return None
+
+    def end_span(
+        self,
+        handle: TraceHandle,
+        *,
+        output: str = "",
+    ) -> None:
+        """Complete a span."""
+        if handle is None or not self.enabled:
+            return
+        try:
+            handle.end(output=output)
+        except Exception:
+            pass
+
+    # -----------------------------------------------------------------
+    # Generations (LLM calls)
+    # -----------------------------------------------------------------
+
+    def log_generation(
+        self,
+        parent_handle: TraceHandle,
+        *,
+        name: str,
+        model: str,
+        messages: list[Any],
+        response: str,
+        tokens_in: int,
+        tokens_out: int,
+        cost: float,
+        latency_s: float,
+        metadata: dict[str, Any] | None = None,
+    ) -> None:
+        """Log an LLM call as a generation under a parent trace/span.
+
+        Args:
+            parent_handle: Parent trace or span handle.
+            name: Generation name (e.g., "llm:deepseek-chat").
+            model: Model identifier.
+            messages: Input messages (OpenAI format).
+            response: Raw response text (will be hashed for PII).
+            tokens_in: Input token count.
+            tokens_out: Output token count.
+            cost: Total cost in USD.
+            latency_s: Latency in seconds.
+            metadata: Extra metadata (tier, provider, etc.).
+        """
+        if parent_handle is None or not self.enabled:
+            return
+        try:
+            parent_handle.generation(
+                name=name,
+                model=model,
+                input=messages,
+                output=hash_content(response),
+                usage={
+                    "input": tokens_in,
+                    "output": tokens_out,
+                    "total": tokens_in + tokens_out,
+                },
+                metadata={
+                    "cost_usd": cost,
+                    "latency_s": latency_s,
+                    **(metadata or {}),
+                },
+            )
+        except Exception:
+            pass
 
     def log_llm_call(
         self,
@@ -212,17 +335,62 @@ class LangfuseTracer:
         cost: float,
         latency_s: float,
     ) -> None:
-        """Log an LLM generation to the trace."""
-        if handle is None or not self.enabled:
-            return
-        handle.generation(
+        """Legacy method — delegates to log_generation."""
+        self.log_generation(
+            parent_handle=handle,
             name=f"llm:{model}",
             model=model,
-            input=messages,
-            output=hash_content(response),
-            usage={"input": tokens_in, "output": tokens_out, "total": tokens_in + tokens_out},
-            metadata={"cost_usd": cost, "latency_s": latency_s},
+            messages=messages,
+            response=response,
+            tokens_in=tokens_in,
+            tokens_out=tokens_out,
+            cost=cost,
+            latency_s=latency_s,
         )
+
+    # -----------------------------------------------------------------
+    # Prompt Versioning
+    # -----------------------------------------------------------------
+
+    def register_prompt(
+        self,
+        name: str,
+        prompt: str,
+        *,
+        labels: list[str] | None = None,
+    ) -> Any:
+        """Register or update a named prompt in Langfuse.
+
+        Returns:
+            Prompt object, or None if disabled/error.
+        """
+        if not self.enabled or self._client is None:
+            return None
+        try:
+            return self._client.create_prompt(
+                name=name,
+                prompt=prompt,
+                labels=labels or [],
+            )
+        except Exception:
+            return None
+
+    def get_prompt(self, name: str) -> Any:
+        """Retrieve the latest version of a named prompt.
+
+        Returns:
+            Prompt object, or None if disabled/error.
+        """
+        if not self.enabled or self._client is None:
+            return None
+        try:
+            return self._client.get_prompt(name=name)
+        except Exception:
+            return None
+
+    # -----------------------------------------------------------------
+    # Cleanup
+    # -----------------------------------------------------------------
 
     def shutdown(self) -> None:
         """Flush and close the Langfuse client."""

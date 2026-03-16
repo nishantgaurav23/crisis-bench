@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "description": "Baseline benchmark scores for regression detection",
+  "updated_at": "2026-03-16",
+  "scenario_count": 10,
+  "scores": {
+    "situational_accuracy": 0.0,
+    "decision_timeliness": 0.0,
+    "resource_efficiency": 0.0,
+    "coordination_quality": 0.0,
+    "communication_appropriateness": 0.0,
+    "aggregate_drs": 0.0
+  },
+  "notes": "Initial baseline — scores are 0.0 until first full benchmark run populates real values"
+}

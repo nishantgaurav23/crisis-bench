@@ -1,4 +1,13 @@
-import { ApiError, AgentCard, AgentType, Disaster, HealthStatus } from "@/types";
+import {
+  ApiError,
+  AgentCard,
+  AgentType,
+  Disaster,
+  EvaluationRunSummary,
+  HealthStatus,
+  MetricsSummary,
+  ScenarioSummary,
+} from "@/types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -66,6 +75,42 @@ export function getAgents(): Promise<AgentCard[]> {
 
 export function getAgent(agentType: AgentType): Promise<AgentCard> {
   return request<AgentCard>(`/api/v1/agents/${agentType}`);
+}
+
+// Benchmark API
+
+export function getScenarios(
+  category?: string,
+  complexity?: string
+): Promise<ScenarioSummary[]> {
+  const params = new URLSearchParams();
+  if (category) params.set("category", category);
+  if (complexity) params.set("complexity", complexity);
+  const qs = params.toString();
+  return request<ScenarioSummary[]>(
+    `/api/v1/benchmark/scenarios${qs ? `?${qs}` : ""}`
+  );
+}
+
+export function getScenario(id: string): Promise<ScenarioSummary> {
+  return request<ScenarioSummary>(`/api/v1/benchmark/scenarios/${id}`);
+}
+
+export function getEvaluationRuns(
+  scenarioId?: string
+): Promise<EvaluationRunSummary[]> {
+  const qs = scenarioId ? `?scenario_id=${scenarioId}` : "";
+  return request<EvaluationRunSummary[]>(`/api/v1/benchmark/runs${qs}`);
+}
+
+export function getEvaluationRun(id: string): Promise<EvaluationRunSummary> {
+  return request<EvaluationRunSummary>(`/api/v1/benchmark/runs/${id}`);
+}
+
+// Metrics API
+
+export function getMetricsSummary(): Promise<MetricsSummary> {
+  return request<MetricsSummary>("/api/v1/metrics/summary");
 }
 
 export { API_BASE };

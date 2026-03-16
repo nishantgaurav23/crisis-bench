@@ -1,0 +1,55 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docker/**"
+      - "docker-compose.yml"
+      - "dashboard/Dockerfile"
+      - "src/**"
+  workflow_dispatch:
+
+concurrency:
+  group: docker-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate Docker Compose
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate docker-compose.yml syntax
+        run: docker compose config --quiet
+
+      - name: Check Dockerfiles exist
+        run: |
+          echo "Checking for Dockerfiles..."
+          for f in dashboard/Dockerfile; do
+            if [ -f "$f" ]; then
+              echo "  Found: $f"
+            else
+              echo "  Warning: $f not found (may not be needed yet)"
+            fi
+          done
+
+  build-dashboard:
+    name: Build Dashboard Image
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build dashboard image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./dashboard
+          push: false
+          tags: crisis-bench/dashboard:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

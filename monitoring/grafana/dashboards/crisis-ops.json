@@ -1,0 +1,226 @@
+{
+  "uid": "crisis-ops",
+  "title": "Crisis Ops Dashboard",
+  "description": "CRISIS-BENCH operational overview: LLM usage, agent tasks, caching, and budget tracking",
+  "tags": ["crisis-bench"],
+  "timezone": "Asia/Kolkata",
+  "editable": true,
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "refresh": "15s",
+  "panels": [
+    {
+      "type": "row",
+      "title": "LLM Overview",
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 0},
+      "collapsed": false
+    },
+    {
+      "type": "timeseries",
+      "title": "LLM Requests/s by Provider",
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 1},
+      "targets": [
+        {
+          "expr": "sum(rate(crisis_llm_requests_total[5m])) by (provider)",
+          "legendFormat": "{{ provider }}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "LLM Tokens/s by Direction",
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 1},
+      "targets": [
+        {
+          "expr": "sum(rate(crisis_llm_tokens_total[5m])) by (direction)",
+          "legendFormat": "{{ direction }}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "LLM Cost Accumulation (USD)",
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 1},
+      "targets": [
+        {
+          "expr": "sum(crisis_llm_cost_dollars) by (provider)",
+          "legendFormat": "{{ provider }}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD"
+        }
+      }
+    },
+    {
+      "type": "row",
+      "title": "Latency",
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 9},
+      "collapsed": false
+    },
+    {
+      "type": "heatmap",
+      "title": "LLM Latency Heatmap",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 10},
+      "targets": [
+        {
+          "expr": "sum(increase(crisis_llm_latency_seconds_bucket[5m])) by (le)",
+          "legendFormat": "{{ le }}",
+          "format": "heatmap"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "LLM Latency Percentiles by Provider",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 10},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum(rate(crisis_llm_latency_seconds_bucket[5m])) by (le, provider))",
+          "legendFormat": "p50 {{ provider }}"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(crisis_llm_latency_seconds_bucket[5m])) by (le, provider))",
+          "legendFormat": "p95 {{ provider }}"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(crisis_llm_latency_seconds_bucket[5m])) by (le, provider))",
+          "legendFormat": "p99 {{ provider }}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      }
+    },
+    {
+      "type": "row",
+      "title": "Agents",
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 18},
+      "collapsed": false
+    },
+    {
+      "type": "timeseries",
+      "title": "Agent Tasks/s",
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 19},
+      "targets": [
+        {
+          "expr": "sum(rate(crisis_agent_tasks_total[5m])) by (agent_id)",
+          "legendFormat": "{{ agent_id }}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops"
+        }
+      }
+    },
+    {
+      "type": "histogram",
+      "title": "Agent Task Duration",
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 19},
+      "targets": [
+        {
+          "expr": "sum(rate(crisis_agent_task_duration_seconds_bucket[5m])) by (le, agent_id)",
+          "legendFormat": "{{ agent_id }}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Error Rate by Agent",
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 19},
+      "targets": [
+        {
+          "expr": "sum(rate(crisis_errors_total[5m])) by (error_code)",
+          "legendFormat": "{{ error_code }}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops"
+        }
+      }
+    },
+    {
+      "type": "row",
+      "title": "Cache & Budget",
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 27},
+      "collapsed": false
+    },
+    {
+      "type": "piechart",
+      "title": "Cache Hit/Miss Ratio",
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 28},
+      "targets": [
+        {
+          "expr": "sum(increase(crisis_cache_operations_total[1h])) by (operation)",
+          "legendFormat": "{{ operation }}"
+        }
+      ]
+    },
+    {
+      "type": "gauge",
+      "title": "Budget Usage",
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 28},
+      "targets": [
+        {
+          "expr": "sum(crisis_llm_cost_dollars) / 8 * 100",
+          "legendFormat": "Budget %"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "yellow", "value": 60},
+              {"color": "red", "value": 90}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Budget Burn Rate (USD/hr)",
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 28},
+      "targets": [
+        {
+          "expr": "sum(rate(crisis_llm_cost_dollars[1h])) * 3600",
+          "legendFormat": "Burn rate"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD"
+        }
+      }
+    }
+  ],
+  "schemaVersion": 39,
+  "version": 1
+}

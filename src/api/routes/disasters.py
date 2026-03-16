@@ -4,6 +4,7 @@ import uuid
 
 from fastapi import APIRouter, Response
 
+from src.api.websocket import manager
 from src.shared.errors import CrisisValidationError
 from src.shared.models import Disaster
 
@@ -15,8 +16,12 @@ _disasters: dict[uuid.UUID, Disaster] = {}
 
 @router.post("", status_code=201, response_model=Disaster)
 async def create_disaster(disaster: Disaster):
-    """Create a new disaster record."""
+    """Create a new disaster record and broadcast via WebSocket."""
     _disasters[disaster.id] = disaster
+    await manager.broadcast(
+        "disaster.created",
+        disaster.model_dump(mode="json"),
+    )
     return disaster
 
 

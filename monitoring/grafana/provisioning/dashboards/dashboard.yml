@@ -1,0 +1,12 @@
+apiVersion: 1
+
+providers:
+  - name: crisis-bench
+    orgId: 1
+    folder: CRISIS-BENCH
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false

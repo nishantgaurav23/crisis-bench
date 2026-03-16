@@ -1,0 +1,52 @@
+groups:
+  - name: crisis_llm_alerts
+    rules:
+      - alert: HighLLMErrorRate
+        expr: |
+          sum(rate(crisis_llm_requests_total{status="error"}[5m]))
+          / sum(rate(crisis_llm_requests_total[5m])) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "LLM error rate exceeds 10%"
+          description: >-
+            LLM error rate is {{ $value | humanizePercentage }} over the last 5 minutes.
+
+      - alert: BudgetExceeded
+        expr: |
+          sum(crisis_llm_cost_dollars) > 8
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Monthly LLM budget exceeded ($8)"
+          description: >-
+            Cumulative LLM cost is ${{ $value | humanize }}, exceeding the $8/month budget.
+
+  - name: crisis_agent_alerts
+    rules:
+      - alert: AgentTaskTimeout
+        expr: |
+          histogram_quantile(0.99, rate(crisis_agent_task_duration_seconds_bucket[5m])) > 60
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Agent task p99 latency exceeds 60s"
+          description: >-
+            Agent {{ $labels.agent_id }} p99 task duration is {{ $value | humanize }}s.
+
+  - name: crisis_cache_alerts
+    rules:
+      - alert: CacheHitRateLow
+        expr: |
+          sum(rate(crisis_cache_operations_total{operation="hit"}[15m]))
+          / sum(rate(crisis_cache_operations_total{operation=~"hit|miss"}[15m])) < 0.5
+        for: 15m
+        labels:
+          severity: info
+        annotations:
+          summary: "Cache hit rate below 50%"
+          description: >-
+            Cache hit rate is {{ $value | humanizePercentage }} over the last 15 minutes.

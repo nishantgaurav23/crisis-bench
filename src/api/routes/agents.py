@@ -1,11 +1,16 @@
 """Agent status endpoints."""
 
+from typing import Any
+
 from fastapi import APIRouter
 
 from src.shared.errors import CrisisValidationError
 from src.shared.models import AgentCard, AgentType, LLMTier
 
 router = APIRouter(prefix="/api/v1/agents", tags=["agents"])
+
+# In-memory decision store — keyed by agent_type
+_agent_decisions: dict[str, list[dict[str, Any]]] = {}
 
 # Static agent registry — will be replaced by live agent status in later specs
 _AGENT_CARDS: dict[str, AgentCard] = {
@@ -84,3 +89,14 @@ async def get_agent(agent_type: str):
             context={"agent_type": agent_type},
         )
     return card
+
+
+@router.get("/{agent_type}/decisions")
+async def list_agent_decisions(agent_type: str) -> list[dict[str, Any]]:
+    """List recent decisions from a specific agent."""
+    if agent_type not in _AGENT_CARDS:
+        raise CrisisValidationError(
+            f"Agent type '{agent_type}' not found",
+            context={"agent_type": agent_type},
+        )
+    return _agent_decisions.get(agent_type, [])

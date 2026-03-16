@@ -51,6 +51,7 @@ from src.shared.models import AgentType, TaskStatus
 from src.shared.telemetry import (
     AGENT_TASK_DURATION,
     AGENT_TASKS,
+    LangfuseTracer,
     get_logger,
 )
 
@@ -109,6 +110,9 @@ class BaseAgent(ABC):
 
         # Compiled LangGraph
         self._compiled_graph = None
+
+        # Langfuse tracer (optional, injected or created)
+        self._tracer: LangfuseTracer | None = None
 
         # Runtime state
         self._active_tasks = 0
@@ -276,6 +280,19 @@ class BaseAgent(ABC):
         AGENT_TASKS.labels(agent_id=self.agent_id, status="in_progress").inc()
         start_time = time.monotonic()
 
+        # Start Langfuse trace for the task
+        langfuse_handle = None
+        if self._tracer is not None:
+            langfuse_handle = self._tracer.start_trace(
+                name=f"task:{self.agent_type.value}",
+                agent_id=self.agent_id,
+                trace_id=trace_id,
+                metadata={
+                    "task_id": str(task.id),
+                    "disaster_id": str(task.disaster_id) if task.disaster_id else "",
+                },
+            )
+
         try:
             initial_state: AgentState = {
                 "task": task.payload,
@@ -316,6 +333,14 @@ class BaseAgent(ABC):
                 trace_id=trace_id,
             )
 
+            # End Langfuse trace (success)
+            if self._tracer is not None:
+                self._tracer.end_trace(
+                    langfuse_handle,
+                    output=f"completed in {elapsed:.2f}s",
+                    status="ok",
+                )
+
         except Exception as e:
             elapsed = time.monotonic() - start_time
             AGENT_TASK_DURATION.labels(agent_id=self.agent_id).observe(elapsed)
@@ -336,6 +361,14 @@ class BaseAgent(ABC):
                     trace_id=trace_id,
                 )
             )
+
+            # End Langfuse trace (error)
+            if self._tracer is not None:
+                self._tracer.end_trace(
+                    langfuse_handle,
+                    output=str(e),
+                    status="error",
+                )
 
         finally:
             self._active_tasks -= 1

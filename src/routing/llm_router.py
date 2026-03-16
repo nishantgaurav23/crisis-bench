@@ -19,6 +19,7 @@ import time
 from collections import deque
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any
 
 from openai import AsyncOpenAI
 
@@ -241,6 +242,7 @@ class LLMRouter:
         max_tokens: int | None = None,
         temperature: float | None = None,
         timeout: float = 60.0,
+        parent_handle: Any = None,
     ) -> LLMResponse:
         """Route an LLM call through the provider chain for the given tier.
 
@@ -282,6 +284,25 @@ class LLMRouter:
                     trace_id=trace_id,
                 )
                 cb.record_success()
+
+                # Log generation to Langfuse under parent handle
+                if self._tracer is not None and parent_handle is not None:
+                    self._tracer.log_generation(
+                        parent_handle=parent_handle,
+                        name=f"llm:{result.model}",
+                        model=result.model,
+                        messages=messages,
+                        response=result.content,
+                        tokens_in=result.input_tokens,
+                        tokens_out=result.output_tokens,
+                        cost=result.cost_usd,
+                        latency_s=result.latency_s,
+                        metadata={
+                            "tier": tier_str,
+                            "provider": result.provider,
+                        },
+                    )
+
                 return result
             except Exception as e:
                 cb.record_failure()

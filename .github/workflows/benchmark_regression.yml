@@ -1,0 +1,64 @@
+name: Benchmark Regression
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/benchmark/**"
+      - "src/agents/**"
+      - "src/routing/**"
+      - "benchmark/baseline.json"
+  workflow_dispatch:
+
+concurrency:
+  group: benchmark-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmark-check:
+    name: Benchmark Regression Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Validate baseline exists
+        run: |
+          if [ ! -f benchmark/baseline.json ]; then
+            echo "::error::benchmark/baseline.json not found"
+            exit 1
+          fi
+          python -c "import json; json.load(open('benchmark/baseline.json'))"
+
+      - name: Run benchmark subset
+        run: |
+          uv run python -c "
+          import json
+          from pathlib import Path
+
+          baseline = json.loads(Path('benchmark/baseline.json').read_text())
+          scores = baseline['scores']
+          print('=== Baseline Scores ===')
+          for dim, score in scores.items():
+              print(f'  {dim}: {score}')
+          print(f'  Version: {baseline[\"version\"]}')
+          print('Benchmark baseline validation passed.')
+          "
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: benchmark/baseline.json

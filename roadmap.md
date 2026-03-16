@@ -248,15 +248,15 @@ A: We model infrastructure as a directed acyclic graph where edges represent dep
 
 | Spec | Spec Location | Depends On | Location | Feature | Notes | Status |
 |------|--------------|------------|----------|---------|-------|--------|
-| S7.1 | `specs/spec-S7.1-base-agent/` | S2.6, S4.2, S4.3, S2.5 | `src/agents/base.py` | BaseAgent (LangGraph + LLM Router) | State machine, A2A integration, Langfuse tracing, health check | pending |
-| S7.2 | `specs/spec-S7.2-orchestrator/` | S7.1 | `src/agents/orchestrator.py` | Orchestrator agent | Mission decomposition, agent activation, synthesis, budget management, loop detection | pending |
-| S7.3 | `specs/spec-S7.3-situation-sense/` | S7.1, S5.1, S5.2 | `src/agents/situation_sense.py` | SituationSense agent | Multi-source data fusion, GeoJSON updates, urgency scoring, misinformation detection | pending |
-| S7.4 | `specs/spec-S7.4-predictive-risk/` | S7.1, S6.1, S6.4 | `src/agents/predictive_risk.py` | PredictiveRisk agent | Forecasting, cascading failures, risk maps, historical analogies, IMD classification tracking | pending |
-| S7.5 | `specs/spec-S7.5-resource-allocation/` | S7.1, S6.5 | `src/agents/resource_allocation.py` | ResourceAllocation agent | OR-Tools optimization, NDRF/SDRF deployment, shelter matching, rolling re-optimization | pending |
-| S7.6 | `specs/spec-S7.6-community-comms/` | S7.1 | `src/agents/community_comms.py` | CommunityComms agent | Multilingual alerts (9 languages), channel formatting, misinformation countering, Bhashini TTS | pending |
-| S7.7 | `specs/spec-S7.7-infra-status/` | S7.1, S6.3 | `src/agents/infra_status.py` | InfraStatus agent | Infrastructure tracking, cascading failure prediction, restoration timelines, priority framework | pending |
-| S7.8 | `specs/spec-S7.8-historical-memory/` | S7.1, S6.1, S6.2 | `src/agents/historical_memory.py` | HistoricalMemory agent | RAG over NDMA docs, historical disaster retrieval, post-event learning ingestion | pending |
-| S7.9 | `specs/spec-S7.9-agent-integration/` | S7.2-S7.8, S3.2 | `tests/integration/test_agent_pipeline.py` | End-to-end agent pipeline integration test | SACHET alert → all agents → bilingual briefing within 45s, WebSocket dashboard update | pending |
+| S7.1 | `specs/spec-S7.1-base-agent/` | S2.6, S4.2, S4.3, S2.5 | `src/agents/base.py` | BaseAgent (LangGraph + LLM Router) | State machine, A2A integration, Langfuse tracing, health check | done |
+| S7.2 | `specs/spec-S7.2-orchestrator/` | S7.1 | `src/agents/orchestrator.py` | Orchestrator agent | Mission decomposition, agent activation, synthesis, budget management, loop detection | done |
+| S7.3 | `specs/spec-S7.3-situation-sense/` | S7.1, S5.1, S5.2 | `src/agents/situation_sense.py` | SituationSense agent | Multi-source data fusion, GeoJSON updates, urgency scoring, misinformation detection | done |
+| S7.4 | `specs/spec-S7.4-predictive-risk/` | S7.1, S6.1, S6.4 | `src/agents/predictive_risk.py` | PredictiveRisk agent | Forecasting, cascading failures, risk maps, historical analogies, IMD classification tracking | done |
+| S7.5 | `specs/spec-S7.5-resource-allocation/` | S7.1, S6.5 | `src/agents/resource_allocation.py` | ResourceAllocation agent | OR-Tools optimization, NDRF/SDRF deployment, shelter matching, rolling re-optimization | done |
+| S7.6 | `specs/spec-S7.6-community-comms/` | S7.1 | `src/agents/community_comms.py` | CommunityComms agent | Multilingual alerts (9 languages), channel formatting, misinformation countering, Bhashini TTS | done |
+| S7.7 | `specs/spec-S7.7-infra-status/` | S7.1, S6.3 | `src/agents/infra_status.py` | InfraStatus agent | Infrastructure tracking, cascading failure prediction, restoration timelines, priority framework | done |
+| S7.8 | `specs/spec-S7.8-historical-memory/` | S7.1, S6.1, S6.2 | `src/agents/historical_memory.py` | HistoricalMemory agent | RAG over NDMA docs, historical disaster retrieval, post-event learning ingestion | done |
+| S7.9 | `specs/spec-S7.9-agent-integration/` | S7.2-S7.8, S3.2 | `tests/integration/test_agent_pipeline.py` | End-to-end agent pipeline integration test | SACHET alert → all agents → bilingual briefing within 45s, WebSocket dashboard update | done |
 
 ### Interview Q&A — Phase 7
 
@@ -371,15 +371,15 @@ A: Oracle's Always Free tier is genuinely permanent — 4 ARM Ampere cores, 24GB
 | S6.5 | Census + admin boundaries | 6 | S2.2 | done |
 | S6.6 | Synthetic scenario generator | 6 | S2.6, S6.2, S6.5 | done |
 | S6.7 | Synthetic social media generator | 6 | S2.6 | done |
-| S7.1 | Base agent (LangGraph + LLM Router) | 7 | S2.6, S4.2, S4.3, S2.5 | pending |
-| S7.2 | Orchestrator agent | 7 | S7.1 | pending |
-| S7.3 | SituationSense agent | 7 | S7.1, S5.1, S5.2 | pending |
-| S7.4 | PredictiveRisk agent | 7 | S7.1, S6.1, S6.4 | pending |
-| S7.5 | ResourceAllocation agent | 7 | S7.1, S6.5 | pending |
-| S7.6 | CommunityComms agent | 7 | S7.1 | pending |
-| S7.7 | InfraStatus agent | 7 | S7.1, S6.3 | pending |
-| S7.8 | HistoricalMemory agent | 7 | S7.1, S6.1, S6.2 | pending |
-| S7.9 | Agent integration test | 7 | S7.2-S7.8, S3.2 | pending |
+| S7.1 | Base agent (LangGraph + LLM Router) | 7 | S2.6, S4.2, S4.3, S2.5 | done |
+| S7.2 | Orchestrator agent | 7 | S7.1 | done |
+| S7.3 | SituationSense agent | 7 | S7.1, S5.1, S5.2 | done |
+| S7.4 | PredictiveRisk agent | 7 | S7.1, S6.1, S6.4 | done |
+| S7.5 | ResourceAllocation agent | 7 | S7.1, S6.5 | done |
+| S7.6 | CommunityComms agent | 7 | S7.1 | done |
+| S7.7 | InfraStatus agent | 7 | S7.1, S6.3 | done |
+| S7.8 | HistoricalMemory agent | 7 | S7.1, S6.1, S6.2 | done |
+| S7.9 | Agent integration test | 7 | S7.2-S7.8, S3.2 | done |
 | S8.1 | Benchmark scenario models | 8 | S2.1, S2.2 | pending |
 | S8.2 | Scenario manager | 8 | S8.1 | pending |
 | S8.3 | Scenario runner (simulated clock) | 8 | S8.2, S7.9 | pending |

@@ -220,13 +220,13 @@ A: Separation of concerns. (1) Each MCP server handles auth, rate limiting, erro
 
 | Spec | Spec Location | Depends On | Location | Feature | Notes | Status |
 |------|--------------|------------|----------|---------|-------|--------|
-| S6.1 | `specs/spec-S6.1-chromadb-setup/` | S1.3 | `src/data/ingest/embeddings.py` | ChromaDB connection + embedding pipeline | Collection creation, nomic-embed-text via Ollama, chunking strategy | pending |
-| S6.2 | `specs/spec-S6.2-ndma-ingestion/` | S6.1 | `src/data/ingest/ndma_pdfs.py` | NDMA guidelines + SOPs ingestion | PDF parsing, chunking, embedding 30+ documents into ChromaDB | pending |
-| S6.3 | `specs/spec-S6.3-neo4j-graph/` | S1.3 | `src/data/ingest/infra_graph.py` | Neo4j infrastructure dependency graph | Power → telecom → water → hospital dependency chains for major Indian cities | pending |
-| S6.4 | `specs/spec-S6.4-imd-historical/` | S2.2 | `src/data/ingest/imd.py` | IMD gridded data ingestion | imdlib download, NetCDF → PostgreSQL, rainfall + temperature time-series | pending |
-| S6.5 | `specs/spec-S6.5-admin-boundaries/` | S2.2 | `src/data/ingest/census.py` | Census 2011 + administrative boundaries | States, districts, population, geometry into PostGIS | pending |
-| S6.6 | `specs/spec-S6.6-scenario-generator/` | S2.6, S6.2, S6.5 | `src/data/synthetic/scenario_gen.py` | Synthetic scenario generator | LLM-powered scenario creation from historical templates, 7 disaster categories | pending |
-| S6.7 | `specs/spec-S6.7-social-media-gen/` | S2.6 | `src/data/synthetic/social_media_gen.py` | Synthetic social media generator | Hindi/English/regional crisis tweets, 40/30/30 language mix | pending |
+| S6.1 | `specs/spec-S6.1-chromadb-setup/` | S1.3 | `src/data/ingest/embeddings.py` | ChromaDB connection + embedding pipeline | Collection creation, nomic-embed-text via Ollama, chunking strategy | done |
+| S6.2 | `specs/spec-S6.2-ndma-ingestion/` | S6.1 | `src/data/ingest/ndma_pdfs.py` | NDMA guidelines + SOPs ingestion | PDF parsing, chunking, embedding 30+ documents into ChromaDB | done |
+| S6.3 | `specs/spec-S6.3-neo4j-graph/` | S1.3 | `src/data/ingest/infra_graph.py` | Neo4j infrastructure dependency graph | Power → telecom → water → hospital dependency chains for major Indian cities | done |
+| S6.4 | `specs/spec-S6.4-imd-historical/` | S2.2 | `src/data/ingest/imd.py` | IMD gridded data ingestion | imdlib download, NetCDF → PostgreSQL, rainfall + temperature time-series | done |
+| S6.5 | `specs/spec-S6.5-admin-boundaries/` | S2.2 | `src/data/ingest/census.py` | Census 2011 + administrative boundaries | States, districts, population, geometry into PostGIS | done |
+| S6.6 | `specs/spec-S6.6-scenario-generator/` | S2.6, S6.2, S6.5 | `src/data/synthetic/scenario_gen.py` | Synthetic scenario generator | LLM-powered scenario creation from historical templates, 7 disaster categories | done |
+| S6.7 | `specs/spec-S6.7-social-media-gen/` | S2.6 | `src/data/synthetic/social_media_gen.py` | Synthetic social media generator | Hindi/English/regional crisis tweets, 40/30/30 language mix | done |
 
 ### Interview Q&A — Phase 6
 
@@ -364,13 +364,13 @@ A: Oracle's Always Free tier is genuinely permanent — 4 ARM Ampere cores, 24GB
 | S5.4 | MCP: OSM Overpass | 5 | S4.4 | done |
 | S5.5 | MCP: ISRO Bhuvan | 5 | S4.4 | done |
 | S5.6 | MCP: NASA FIRMS Fire | 5 | S4.4 | done |
-| S6.1 | ChromaDB setup + embedding pipeline | 6 | S1.3 | pending |
-| S6.2 | NDMA guidelines ingestion | 6 | S6.1 | pending |
-| S6.3 | Neo4j infrastructure graph | 6 | S1.3 | pending |
-| S6.4 | IMD historical data ingestion | 6 | S2.2 | pending |
-| S6.5 | Census + admin boundaries | 6 | S2.2 | pending |
-| S6.6 | Synthetic scenario generator | 6 | S2.6, S6.2, S6.5 | pending |
-| S6.7 | Synthetic social media generator | 6 | S2.6 | pending |
+| S6.1 | ChromaDB setup + embedding pipeline | 6 | S1.3 | done |
+| S6.2 | NDMA guidelines ingestion | 6 | S6.1 | done |
+| S6.3 | Neo4j infrastructure graph | 6 | S1.3 | done |
+| S6.4 | IMD historical data ingestion | 6 | S2.2 | done |
+| S6.5 | Census + admin boundaries | 6 | S2.2 | done |
+| S6.6 | Synthetic scenario generator | 6 | S2.6, S6.2, S6.5 | done |
+| S6.7 | Synthetic social media generator | 6 | S2.6 | done |
 | S7.1 | Base agent (LangGraph + LLM Router) | 7 | S2.6, S4.2, S4.3, S2.5 | pending |
 | S7.2 | Orchestrator agent | 7 | S7.1 | pending |
 | S7.3 | SituationSense agent | 7 | S7.1, S5.1, S5.2 | pending |

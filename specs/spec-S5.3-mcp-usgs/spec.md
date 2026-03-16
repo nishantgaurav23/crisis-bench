@@ -4,7 +4,7 @@
 **Depends On**: S4.4 (MCP server base framework)
 **Location**: `src/protocols/mcp/usgs_server.py`
 **Tests**: `tests/unit/test_mcp_usgs.py`
-**Status**: pending
+**Status**: done
 
 ---
 

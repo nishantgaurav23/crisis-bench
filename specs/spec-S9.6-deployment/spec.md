@@ -1,5 +1,7 @@
 # Spec S9.6: Oracle Cloud Always Free Deployment
 
+**Status**: done
+
 ## Overview
 Production-ready deployment configuration for Oracle Cloud Infrastructure (OCI) Always Free tier. ARM64 (Ampere A1) Docker images, automated setup script, health monitoring, and nginx reverse proxy.
 

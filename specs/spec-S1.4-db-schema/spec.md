@@ -1,6 +1,6 @@
 # Spec S1.4: PostgreSQL/PostGIS Database Schema
 
-**Status**: spec-written
+**Status**: done
 **Phase**: 1 — Project Bootstrap
 **Depends On**: S1.2 (Docker Compose) ✅ done
 **Location**: `scripts/init_db.sql`

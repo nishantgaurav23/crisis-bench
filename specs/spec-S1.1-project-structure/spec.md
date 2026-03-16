@@ -1,7 +1,7 @@
 # Spec S1.1: Project Structure + Dependency Declaration
 
 **Phase**: 1 — Project Bootstrap
-**Status**: spec-written
+**Status**: done
 **Depends On**: None
 **Outputs**: `pyproject.toml`, `.gitignore`, `.env.example`, `src/**/__init__.py`, `tests/conftest.py`
 

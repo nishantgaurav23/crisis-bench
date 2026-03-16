@@ -1,6 +1,6 @@
 # Spec S1.2: Docker Compose for All Services
 
-**Status**: spec-written
+**Status**: done
 **Phase**: 1 — Project Bootstrap
 **Depends On**: S1.1 (Project structure + dependencies) ✅ done
 **Location**: `docker-compose.yml`, `docker-compose.cpu.yml`
@@ -22,8 +22,8 @@ Create a Docker Compose configuration that starts all infrastructure services wi
 
 | Service | Image | Port(s) | Volume | Health Check |
 |---------|-------|---------|--------|--------------|
-| PostgreSQL + PostGIS | `postgis/postgis:16-3.4` | 5432 | `postgres_data` | `pg_isready` |
-| Redis 7 | `redis:7-alpine` | 6379 | `redis_data` | `redis-cli ping` |
+| PostgreSQL + PostGIS | `postgis/postgis:16-3.4` | `${POSTGRES_PORT:-5434}` | `postgres_data` | `pg_isready` |
+| Redis 7 | `redis:7-alpine` | `${REDIS_PORT:-6381}` | `redis_data` | `redis-cli ping` |
 | Neo4j Community | `neo4j:5-community` | 7474 (HTTP), 7687 (Bolt) | `neo4j_data` | HTTP check on 7474 |
 | ChromaDB | `chromadb/chroma:latest` | 8100 | `chroma_data` | HTTP check on `/api/v1/heartbeat` |
 | Langfuse | `langfuse/langfuse:2` | 4000 | — (uses PostgreSQL) | HTTP check on `/api/public/health` |
@@ -51,7 +51,7 @@ Create a Docker Compose configuration that starts all infrastructure services wi
 
 #### PostgreSQL + PostGIS
 - Image: `postgis/postgis:16-3.4`
-- Port: `5432:5432`
+- Port: `${POSTGRES_PORT:-5434}:5432` (configurable via env, default 5434 to avoid conflicts)
 - Environment: `POSTGRES_USER=crisis`, `POSTGRES_PASSWORD=${POSTGRES_PASSWORD}`, `POSTGRES_DB=crisis_bench`
 - Volume: `postgres_data:/var/lib/postgresql/data`
 - Init script mount: `./scripts/init_langfuse_db.sh:/docker-entrypoint-initdb.d/init_langfuse_db.sh`
@@ -60,7 +60,7 @@ Create a Docker Compose configuration that starts all infrastructure services wi
 
 #### Redis
 - Image: `redis:7-alpine`
-- Port: `6379:6379`
+- Port: `${REDIS_PORT:-6381}:6379` (configurable via env, default 6381 to avoid conflicts)
 - Command: `redis-server --appendonly yes` (AOF persistence for Streams durability)
 - Volume: `redis_data:/data`
 - Health check: `redis-cli ping`
@@ -93,14 +93,14 @@ Create a Docker Compose configuration that starts all infrastructure services wi
 #### Prometheus
 - Image: `prom/prometheus:latest`
 - Port: `9090:9090`
-- Volume: `prometheus_data:/prometheus`, `./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro`
+- Volume: `prometheus_data:/prometheus`, `./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro`, `./monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro`
 - Health check: `wget --no-verbose --tries=1 --spider http://localhost:9090/-/healthy || exit 1`
 - Restart: `unless-stopped`
 
 #### Grafana
 - Image: `grafana/grafana:latest`
 - Port: `4001:3000`
-- Volume: `grafana_data:/var/lib/grafana`
+- Volume: `grafana_data:/var/lib/grafana`, `./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro`, `./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro`
 - Environment: `GF_SECURITY_ADMIN_PASSWORD=admin`, `GF_SERVER_HTTP_PORT=3000`
 - Depends on: `prometheus` (started)
 - Health check: `curl -f http://localhost:3000/api/health || exit 1`

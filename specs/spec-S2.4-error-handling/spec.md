@@ -1,6 +1,6 @@
 # Spec S2.4: CrisisError Exception Hierarchy
 
-**Status**: spec-written
+**Status**: done
 **Location**: `src/shared/errors.py`
 **Depends On**: None
 **Consumed By**: S2.5 (telemetry), S2.6 (LLM Router), S3.1 (API gateway), S4.1 (A2A schemas), all agents

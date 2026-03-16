@@ -3,7 +3,7 @@
 **Phase**: 9 (Optimization & Polish)
 **Depends On**: S1.5 (Makefile)
 **Location**: `.github/workflows/`
-**Status**: spec-written
+**Status**: done
 
 ---
 

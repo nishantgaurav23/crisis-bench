@@ -1,6 +1,6 @@
 # Spec S7.8 — HistoricalMemory Agent
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S7.1 (BaseAgent), S6.1 (ChromaDB setup), S6.2 (NDMA ingestion)
 **Location**: `src/agents/historical_memory.py`
 **Test File**: `tests/unit/test_historical_memory.py`

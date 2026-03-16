@@ -1,5 +1,7 @@
 # Spec S8.3 — Scenario Runner with Simulated Clock
 
+**Status**: done
+
 ## Overview
 
 **Location**: `src/benchmark/scenario_runner.py`

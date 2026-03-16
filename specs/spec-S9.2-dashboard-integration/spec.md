@@ -1,6 +1,6 @@
 # Spec S9.2 — Dashboard Full Data Integration
 
-**Status**: spec-written
+**Status**: done
 **Phase**: 9 (Optimization & Polish)
 **Depends On**: S3.4-S3.7 (dashboard components), S7.9 (agent integration), S8.4 (evaluation engine)
 **Location**: `dashboard/src/`, `src/api/routes/`

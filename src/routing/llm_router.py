@@ -177,9 +177,11 @@ class LLMRouter:
         self,
         settings: CrisisSettings,
         tracer: LangfuseTracer | None = None,
+        cost_tracker: Any | None = None,
     ) -> None:
         self._settings = settings
         self._tracer = tracer
+        self._cost_tracker = cost_tracker
         self._providers: dict[str, LLMProvider] = {}
         self._rate_limiters: dict[str, SlidingWindowRateLimiter] = {}
         self._circuit_breakers: dict[str, CircuitBreaker] = {}
@@ -319,6 +321,10 @@ class LLMRouter:
                 )
                 cb.record_success()
 
+                # Record cost
+                if self._cost_tracker is not None:
+                    self._cost_tracker.record(result)
+
                 # Log generation to Langfuse under parent handle
                 if self._tracer is not None and parent_handle is not None:
                     self._tracer.log_generation(
@@ -436,6 +442,12 @@ class LLMRouter:
             latency_s=latency,
             tier=tier,
         )
+
+    def get_cost_summary(self) -> dict:
+        """Return cost summary from the tracker, or empty dict if no tracker."""
+        if self._cost_tracker is not None:
+            return self._cost_tracker.get_summary()
+        return {}
 
     def get_provider_status(self) -> dict[str, dict]:
         """Return status for all providers (circuit state, rate limit, etc.)."""

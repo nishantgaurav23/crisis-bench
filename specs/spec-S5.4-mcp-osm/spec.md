@@ -1,7 +1,7 @@
 # Spec S5.4: OpenStreetMap Overpass MCP Server
 
 **Phase**: 5 — MCP Data Servers
-**Status**: pending
+**Status**: done
 **Depends On**: S4.4 (MCP base framework)
 **Location**: `src/protocols/mcp/osm_server.py`
 **Tests**: `tests/unit/test_mcp_osm.py`

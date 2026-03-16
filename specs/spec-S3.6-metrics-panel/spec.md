@@ -1,5 +1,7 @@
 # Spec S3.6 — MetricsPanel Component
 
+**Status**: done
+
 ## Overview
 
 A React dashboard component that displays LLM token usage, cost tracking per provider, a budget gauge, and latency statistics. Uses mock data initially (real cost tracker data comes from S2.8 later).

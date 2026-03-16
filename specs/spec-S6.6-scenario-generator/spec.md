@@ -1,5 +1,7 @@
 # Spec S6.6: Synthetic Scenario Generator
 
+**Status**: done
+
 ## Overview
 LLM-powered synthetic disaster scenario generator that creates India-specific benchmark scenarios from historical templates, geographic data, and NDMA guidelines. Produces `BenchmarkScenario` objects for the benchmark engine (Phase 8).
 

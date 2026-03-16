@@ -1,5 +1,7 @@
 # Spec S2.6: LLM Router — 5-Tier Multi-Provider Routing
 
+**Status**: done
+
 ## Overview
 
 The LLM Router is the core abstraction that decouples all agents from specific LLM providers. Every LLM call in the system goes through `LLMRouter.call(tier, messages)` — the router handles provider selection, automatic failover, cost tracking, rate limiting, circuit breaking, and Prometheus/Langfuse observability.

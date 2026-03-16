@@ -1,7 +1,7 @@
 # Spec S4.3: A2A Client (Redis Streams Subscriber)
 
 **Phase**: 4 — Communication Protocols
-**Status**: spec-written
+**Status**: done
 **Depends On**: S4.1 (A2A schemas), S2.3 (Redis utils)
 **Location**: `src/protocols/a2a/client.py`
 **Feature**: A2A client for subscribing to tasks, sending responses, and acknowledging messages via Redis Streams

@@ -1,5 +1,7 @@
 # Spec S4.4 — MCP Server Base Framework
 
+**Status**: done
+
 **Phase**: 4 — Communication Protocols
 **Location**: `src/protocols/mcp/base.py`
 **Depends On**: S1.3 (config)

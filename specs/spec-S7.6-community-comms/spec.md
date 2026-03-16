@@ -1,5 +1,7 @@
 # Spec S7.6 — CommunityComms Agent
 
+**Status**: done
+
 **Phase**: 7 (Agent System)
 **Depends On**: S7.1 (BaseAgent)
 **Location**: `src/agents/community_comms.py`

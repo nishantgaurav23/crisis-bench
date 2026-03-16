@@ -3,7 +3,7 @@
 **Phase**: 8 — Benchmark System
 **Location**: `src/benchmark/self_evolving.py`
 **Depends On**: S8.2 (Scenario Manager), S6.6 (Synthetic Scenario Generator)
-**Status**: spec-written
+**Status**: done
 
 ---
 

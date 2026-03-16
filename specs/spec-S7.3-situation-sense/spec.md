@@ -1,6 +1,6 @@
 # Spec S7.3 — SituationSense Agent
 
-**Status**: spec-written
+**Status**: done
 **Location**: `src/agents/situation_sense.py`
 **Depends On**: S7.1 (BaseAgent), S5.1 (MCP IMD), S5.2 (MCP SACHET)
 **Depended By**: S7.9 (Agent Integration Test), S9.2 (Dashboard Integration)

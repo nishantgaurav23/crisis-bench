@@ -1,6 +1,6 @@
 # Spec S2.1: Pydantic Domain Models
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S1.3 (Environment config)
 **Location**: `src/shared/models.py`
 **Phase**: 2 — Shared Infrastructure

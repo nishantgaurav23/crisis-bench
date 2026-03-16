@@ -1,7 +1,7 @@
 # Spec S3.2 — WebSocket Server
 
 **Phase**: 3 (API + Dashboard MVP)
-**Status**: spec-written
+**Status**: done
 **Depends On**: S3.1 (FastAPI gateway), S2.3 (Redis utils)
 **Location**: `src/api/websocket.py`
 

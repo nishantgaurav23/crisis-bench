@@ -1,5 +1,7 @@
 # Spec S3.4: India-Centered Leaflet Map (GeoMap)
 
+**Status**: done
+
 ## Overview
 Interactive Leaflet map component centered on India with OpenStreetMap tiles, disaster markers with severity-based styling, flood zone polygons, and state/district boundary overlays. Uses `react-leaflet` for React integration.
 

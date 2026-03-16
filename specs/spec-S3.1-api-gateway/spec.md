@@ -1,6 +1,6 @@
 # S3.1 — FastAPI Gateway
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S1.3 (config), S2.1 (domain models), S2.4 (error handling)
 **Location**: `src/api/main.py`, `src/api/routes/`
 

@@ -1,5 +1,7 @@
 # Spec S8.2 — Scenario Manager
 
+**Status**: done
+
 ## Overview
 
 **Location**: `src/benchmark/scenario_manager.py`

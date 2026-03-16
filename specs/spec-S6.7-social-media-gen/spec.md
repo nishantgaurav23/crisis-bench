@@ -1,6 +1,6 @@
 # Spec S6.7: Synthetic Social Media Generator
 
-**Status**: spec-written
+**Status**: done
 **Location**: `src/data/synthetic/social_media_gen.py`
 **Depends On**: S2.6 (LLM Router)
 **Phase**: 6 — Data Pipeline

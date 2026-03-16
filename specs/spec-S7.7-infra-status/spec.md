@@ -1,5 +1,7 @@
 # Spec S7.7: InfraStatus Agent
 
+**Status**: done
+
 ## Overview
 The InfraStatus agent tracks infrastructure health (power, telecom, water, hospitals, roads, shelters), predicts cascading failures via Neo4j graph traversal, estimates restoration timelines, and applies NDMA priority restoration framework.
 

@@ -1,6 +1,6 @@
 # Spec S2.2: Async PostgreSQL/PostGIS Connection
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S1.3 (Environment config), S1.4 (Database schema)
 **Location**: `src/shared/db.py`
 **Phase**: 2 — Shared Infrastructure

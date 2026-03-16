@@ -109,7 +109,7 @@ A: Type safety + validation at startup. If `REDIS_URL` is missing or `POSTGRES_P
 | S2.5 | `specs/spec-S2.5-telemetry/` | S1.3 | `src/shared/telemetry.py` | Structured logging + metrics | structlog JSON, Prometheus counters/histograms, Langfuse trace stubs | done |
 | S2.6 | `specs/spec-S2.6-llm-router/` | S1.3, S2.4, S2.5 | `src/routing/llm_router.py` | LLM Router — 5-tier multi-provider routing | DeepSeek/Qwen/Kimi/Groq/Ollama failover, cost tracking, rate limiting | done |
 | S2.7 | `specs/spec-S2.7-urgency-classifier/` | S2.6 | `src/routing/urgency_classifier.py` | Urgency classification (1-5) | Maps disaster data to LLM tier, uses IMD warning color codes | done |
-| S2.8 | `specs/spec-S2.8-cost-tracker/` | S2.6 | `src/routing/cost_tracker.py` | Per-provider cost tracking | Tracks tokens, cost, latency per provider; budget alerts | pending |
+| S2.8 | `specs/spec-S2.8-cost-tracker/` | S2.6 | `src/routing/cost_tracker.py` | Per-provider cost tracking | Tracks tokens, cost, latency per provider; budget alerts | done |
 
 ### Interview Q&A — Phase 2
 
@@ -346,7 +346,7 @@ A: Oracle's Always Free tier is genuinely permanent — 4 ARM Ampere cores, 24GB
 | S2.5 | Telemetry (structlog + Prometheus + Langfuse) | 2 | S1.3 | done |
 | S2.6 | LLM Router (5-tier multi-provider) | 2 | S1.3, S2.4, S2.5 | done |
 | S2.7 | Urgency classifier | 2 | S2.6 | done |
-| S2.8 | Cost tracker | 2 | S2.6 | pending |
+| S2.8 | Cost tracker | 2 | S2.6 | done |
 | S3.1 | FastAPI gateway | 3 | S1.3, S2.1, S2.4 | done |
 | S3.2 | WebSocket server | 3 | S3.1, S2.3 | done |
 | S3.3 | Next.js dashboard setup | 3 | — | done |

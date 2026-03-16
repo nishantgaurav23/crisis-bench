@@ -1,5 +1,7 @@
 # Spec S8.6: Metric — Decision Timeliness
 
+**Status**: done
+
 **Phase**: 8 (Benchmark System)
 **Depends On**: S8.4 (Evaluation Engine)
 **Location**: `src/benchmark/metrics/timeliness.py`

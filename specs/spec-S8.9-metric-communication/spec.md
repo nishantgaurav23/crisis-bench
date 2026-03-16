@@ -1,6 +1,6 @@
 # Spec S8.9 — Metric: Communication Appropriateness
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S8.4 (Evaluation Engine)
 **Location**: `src/benchmark/metrics/communication.py`
 **Test File**: `tests/unit/test_metric_communication.py`

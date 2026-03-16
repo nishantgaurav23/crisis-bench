@@ -4,7 +4,7 @@
 **Depends On**: S4.4 (MCP server base framework)
 **Location**: `src/protocols/mcp/firms_server.py`
 **Tests**: `tests/unit/test_mcp_firms.py`
-**Status**: pending
+**Status**: done
 
 ---
 

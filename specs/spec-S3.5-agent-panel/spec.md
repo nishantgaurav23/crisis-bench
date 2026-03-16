@@ -3,7 +3,7 @@
 **Phase**: 3 — API + Dashboard MVP
 **Depends On**: S3.3 (Next.js dashboard setup)
 **Location**: `dashboard/src/components/AgentFlow.tsx`
-**Status**: pending
+**Status**: done
 
 ---
 

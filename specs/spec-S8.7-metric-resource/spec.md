@@ -1,5 +1,7 @@
 # Spec S8.7: Resource Efficiency Metric
 
+**Status**: done
+
 **Phase**: 8 — Benchmark System
 **Depends On**: S8.4 (Evaluation Engine)
 **Location**: `src/benchmark/metrics/resource.py`

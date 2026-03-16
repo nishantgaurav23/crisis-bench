@@ -1,7 +1,7 @@
 # Spec S1.3: Pydantic Settings Environment Configuration
 
 **Phase**: 1 — Project Bootstrap
-**Status**: spec-written
+**Status**: done
 **Depends On**: S1.1 (project structure, `.env.example`)
 **Outputs**: `src/shared/config.py`
 

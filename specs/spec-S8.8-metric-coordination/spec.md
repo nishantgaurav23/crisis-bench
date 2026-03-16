@@ -1,5 +1,7 @@
 # Spec S8.8 — Metric: Coordination Quality
 
+**Status**: done
+
 ## Overview
 
 **Feature**: Coordination Quality metric for CRISIS-BENCH benchmark evaluation.

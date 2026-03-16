@@ -1,5 +1,7 @@
 # Spec S5.1: IMD Weather MCP Server
 
+**Status**: done
+
 **Phase**: 5 — MCP Data Servers
 **Depends On**: S4.4 (MCP server base framework)
 **Location**: `src/protocols/mcp/imd_server.py`

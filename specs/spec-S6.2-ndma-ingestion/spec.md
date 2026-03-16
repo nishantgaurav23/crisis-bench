@@ -3,7 +3,7 @@
 **Phase**: 6 — Data Pipeline
 **Location**: `src/data/ingest/ndma_pdfs.py`
 **Depends On**: S6.1 (ChromaDB Setup + Embedding Pipeline)
-**Status**: pending
+**Status**: done
 
 ---
 

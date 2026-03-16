@@ -1,5 +1,7 @@
 # Spec S3.7: Event Timeline Component
 
+**Status**: done
+
 ## Overview
 A React component that displays a chronological timeline of disaster events, agent decisions, and phase transitions. Used in the CRISIS-BENCH dashboard to give operators a temporal view of the response lifecycle.
 

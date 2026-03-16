@@ -1,5 +1,7 @@
 # Spec S8.10 — Aggregate Disaster Response Score (DRS)
 
+**Status**: done
+
 ## Overview
 Computes the aggregate Disaster Response Score by combining the 5 individual metric scores (S8.5-S8.9) using configurable weights. Supports pass@k reliability measurement for statistical robustness.
 

@@ -1,5 +1,7 @@
 # Spec S6.4: IMD Historical Gridded Data Ingestion
 
+**Status**: done
+
 ## Overview
 Ingest IMD historical gridded rainfall and temperature data into PostgreSQL/PostGIS using `imdlib`. Downloads binary IMD data, converts to xarray datasets, and stores daily district-level aggregated time-series in the `imd_observations` table.
 

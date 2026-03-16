@@ -1,6 +1,6 @@
 # Spec S7.1 — BaseAgent (LangGraph + LLM Router)
 
-**Status**: spec-written
+**Status**: done
 **Location**: `src/agents/base.py`
 **Depends On**: S2.6 (LLM Router), S4.2 (A2A Server), S4.3 (A2A Client), S2.5 (Telemetry)
 **Depended By**: S7.2–S7.8 (all specialist agents), S9.3 (Langfuse integration)

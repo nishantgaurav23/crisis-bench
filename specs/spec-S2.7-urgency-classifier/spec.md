@@ -1,6 +1,6 @@
 # Spec S2.7 — Urgency Classifier
 
-**Status**: spec-written
+**Status**: done
 **Location**: `src/routing/urgency_classifier.py`
 **Depends On**: S2.6 (LLM Router)
 **Phase**: 2 — Shared Infrastructure

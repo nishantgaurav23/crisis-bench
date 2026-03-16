@@ -1,6 +1,6 @@
 # Spec S1.5: Makefile
 
-**Status**: spec-written
+**Status**: done
 **Phase**: 1 — Project Bootstrap
 **Depends On**: S1.2 (Docker Compose) ✅ done
 **Location**: `Makefile`

@@ -1,6 +1,6 @@
 # Spec S7.5 — ResourceAllocation Agent
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S7.1 (BaseAgent), S6.5 (Census + admin boundaries)
 **Location**: `src/agents/resource_allocation.py`
 **Test**: `tests/unit/test_resource_allocation.py`

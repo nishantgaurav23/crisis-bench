@@ -1,5 +1,7 @@
 # Spec S6.5: Census 2011 + Administrative Boundaries
 
+**Status**: done
+
 ## Overview
 
 Ingest India's Census 2011 data and administrative boundary geometries into PostGIS. This module populates the `states` and `districts` tables with population, area, local names, primary languages, seismic zones, and MultiPolygon geometries. The ResourceAllocation agent (S7.5) and ScenarioGenerator (S6.6) depend on this for spatial queries and demographic context.

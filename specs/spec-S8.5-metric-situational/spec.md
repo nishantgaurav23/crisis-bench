@@ -1,6 +1,6 @@
 # Spec S8.5 — Metric: Situational Accuracy
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S8.4 (Evaluation Engine)
 **Location**: `src/benchmark/metrics/situational.py`
 **Test File**: `tests/unit/test_metric_situational.py`

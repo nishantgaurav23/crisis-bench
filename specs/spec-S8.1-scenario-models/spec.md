@@ -1,5 +1,7 @@
 # Spec S8.1 — Benchmark Scenario Models + Storage
 
+**Status**: done
+
 ## Overview
 
 **Location**: `src/benchmark/models.py`

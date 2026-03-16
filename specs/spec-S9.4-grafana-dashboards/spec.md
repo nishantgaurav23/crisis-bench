@@ -3,7 +3,7 @@
 **Phase**: 9 — Optimization & Polish
 **Depends On**: S2.5 (Telemetry)
 **Location**: `monitoring/`
-**Status**: spec-written
+**Status**: done
 
 ---
 

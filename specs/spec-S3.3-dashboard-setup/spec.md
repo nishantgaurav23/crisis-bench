@@ -3,7 +3,7 @@
 **Phase**: 3 — API + Dashboard MVP
 **Depends On**: — (no dependencies)
 **Location**: `dashboard/`
-**Status**: pending
+**Status**: done
 
 ---
 

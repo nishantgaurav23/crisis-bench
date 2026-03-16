@@ -1,6 +1,6 @@
 # Spec S8.4: Evaluation Engine (LLM-as-Judge)
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S8.3 (Scenario Runner), S2.6 (LLM Router)
 **Location**: `src/benchmark/evaluation_engine.py`
 **Tests**: `tests/unit/test_evaluation_engine.py`

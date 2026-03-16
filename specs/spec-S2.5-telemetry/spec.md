@@ -1,6 +1,6 @@
 # Spec S2.5 — Telemetry (structlog + Prometheus + Langfuse)
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S1.3 (Environment config)
 **Location**: `src/shared/telemetry.py`
 **Phase**: 2 (Shared Infrastructure)

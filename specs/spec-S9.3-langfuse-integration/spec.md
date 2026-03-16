@@ -1,5 +1,7 @@
 # Spec S9.3: Langfuse Full Integration
 
+**Status**: done
+
 ## Overview
 
 **Feature**: Full Langfuse LLM observability integration

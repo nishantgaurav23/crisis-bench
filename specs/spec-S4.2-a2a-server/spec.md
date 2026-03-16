@@ -1,6 +1,6 @@
 # Spec S4.2: A2A Server (Redis Streams Publisher)
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S4.1 (A2A schemas), S2.3 (Redis utils)
 **Location**: `src/protocols/a2a/server.py`
 **Phase**: 4 — Communication Protocols

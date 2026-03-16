@@ -1,7 +1,6 @@
 # Spec S7.9 — End-to-End Agent Pipeline Integration Test
 
-## Status
-spec-written
+**Status**: done
 
 ## Summary
 Integration tests that validate the full multi-agent pipeline: SACHET alert ingestion → Orchestrator decomposition → parallel specialist agent execution → synthesis → bilingual briefing → WebSocket dashboard update. All external services mocked.

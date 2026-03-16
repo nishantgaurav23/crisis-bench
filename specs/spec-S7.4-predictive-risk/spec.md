@@ -1,6 +1,6 @@
 # Spec S7.4 — PredictiveRisk Agent
 
-**Status**: spec-written
+**Status**: done
 **Phase**: 7 (Agent System)
 **Depends On**: S7.1 (BaseAgent), S6.1 (ChromaDB setup), S6.4 (IMD historical data)
 **Location**: `src/agents/predictive_risk.py`

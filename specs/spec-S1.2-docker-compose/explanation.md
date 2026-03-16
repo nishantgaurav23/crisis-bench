@@ -7,8 +7,8 @@ Every service in CRISIS-BENCH — PostgreSQL/PostGIS for spatial data, Redis for
 ## What It Does
 
 1. **`docker-compose.yml`** — Defines 7 services on a shared `crisis-net` bridge network:
-   - **PostgreSQL + PostGIS** (port 5432): Primary relational + spatial database. Hosts both the `crisis_bench` app database and a `langfuse` database (created by an init script) so Langfuse doesn't need its own PostgreSQL instance.
-   - **Redis 7** (port 6379): Dual-purpose — Redis Streams for the A2A event bus + standard cache. AOF persistence enabled so stream messages survive restarts.
+   - **PostgreSQL + PostGIS** (port `${POSTGRES_PORT:-5434}`): Primary relational + spatial database. Hosts both the `crisis_bench` app database and a `langfuse` database (created by an init script) so Langfuse doesn't need its own PostgreSQL instance. Port is configurable via env var to avoid conflicts with other local PostgreSQL instances.
+   - **Redis 7** (port `${REDIS_PORT:-6381}`): Dual-purpose — Redis Streams for the A2A event bus + standard cache. AOF persistence enabled so stream messages survive restarts. Port is configurable via env var to avoid conflicts with other local Redis instances.
    - **Neo4j Community** (ports 7474/7687): Graph database for infrastructure dependency modeling. APOC plugin enabled for advanced graph algorithms.
    - **ChromaDB** (port 8100): Vector database for RAG embeddings. Telemetry disabled.
    - **Langfuse** (port 4000): Self-hosted LLM observability. Depends on PostgreSQL being healthy before starting.
@@ -28,7 +28,9 @@ Docker Compose reads the YAML, creates named volumes for data persistence, spins
 **Key design decisions:**
 - **One PostgreSQL instance, two databases**: Langfuse gets its own DB on the same instance rather than a separate PostgreSQL container. Saves ~200MB RAM.
 - **Redis AOF persistence**: `--appendonly yes` ensures Redis Streams messages survive container restarts — critical for the A2A event bus where losing an alert is unacceptable.
-- **Port remapping**: Langfuse (4000→3000) and Grafana (4001→3000) are remapped to avoid collisions since both use port 3000 internally.
+- **Port remapping**: Langfuse (4000→3000) and Grafana (4001→3000) are remapped to avoid collisions since both use port 3000 internally. PostgreSQL and Redis use env-var-configurable ports (defaulting to 5434 and 6381) to avoid conflicts when other projects occupy the standard ports.
+- **Prometheus alert rules**: `monitoring/alerts.yml` is mounted read-only alongside `prometheus.yml` for alerting on budget overruns, latency spikes, and agent failures.
+- **Grafana provisioning**: Dashboard and datasource provisioning directories are mounted read-only from `monitoring/grafana/provisioning/` and `monitoring/grafana/dashboards/`, enabling auto-configured dashboards on startup.
 - **Ollama runs on host**: Not in Docker, so it can access the GPU directly. Services reach it via `host.docker.internal`.
 
 ## How It Connects

@@ -1,5 +1,7 @@
 # Spec S5.2: SACHET CAP Feed MCP Server
 
+**Status**: done
+
 **Phase**: 5 — MCP Data Servers
 **Depends On**: S4.4 (MCP server base framework)
 **Location**: `src/protocols/mcp/sachet_server.py`

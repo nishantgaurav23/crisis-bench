@@ -1,6 +1,6 @@
 # Spec S2.3: Redis Streams + Cache Utilities
 
-**Status**: spec-written
+**Status**: done
 **Depends On**: S1.3 (Environment config)
 **Location**: `src/shared/redis_utils.py`
 **Phase**: 2 — Shared Infrastructure

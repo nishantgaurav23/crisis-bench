@@ -1,5 +1,7 @@
 # Spec S9.1 — Agentic Plan Caching
 
+**Status**: done
+
 ## Overview
 
 ChromaDB-based caching of agent response plans, enabling similarity-based retrieval and LLM-powered adaptation of past plans to new scenarios. Targets >20% latency reduction for recurring disaster patterns.

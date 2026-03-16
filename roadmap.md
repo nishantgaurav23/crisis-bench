@@ -281,17 +281,17 @@ A: (1) **Specialization** — each agent has a focused system prompt and domain 
 
 | Spec | Spec Location | Depends On | Location | Feature | Notes | Status |
 |------|--------------|------------|----------|---------|-------|--------|
-| S8.1 | `specs/spec-S8.1-scenario-models/` | S2.1, S2.2 | `src/benchmark/models.py` | Scenario data models + storage | BenchmarkScenario, EventSequence, GroundTruth Pydantic models + DB CRUD | pending |
-| S8.2 | `specs/spec-S8.2-scenario-manager/` | S8.1 | `src/benchmark/scenario_manager.py` | Scenario manager | CRUD, category filtering, complexity levels, version tracking | pending |
-| S8.3 | `specs/spec-S8.3-scenario-runner/` | S8.2, S7.9 | `src/benchmark/scenario_runner.py` | Scenario runner with simulated clock | Deterministic replay, configurable acceleration (5x), event injection | pending |
-| S8.4 | `specs/spec-S8.4-evaluation-engine/` | S8.3, S2.6 | `src/benchmark/evaluation_engine.py` | Evaluation engine (LLM-as-judge) | DeepSeek Reasoner as judge, structured scoring rubric, multi-dimensional | pending |
-| S8.5 | `specs/spec-S8.5-metric-situational/` | S8.4 | `src/benchmark/metrics/situational.py` | Metric: Situational Accuracy | Precision/recall/F1 against IMD/CWC ground truth bulletins | pending |
-| S8.6 | `specs/spec-S8.6-metric-timeliness/` | S8.4 | `src/benchmark/metrics/timeliness.py` | Metric: Decision Timeliness | Measured against NDMA SOP time windows | pending |
-| S8.7 | `specs/spec-S8.7-metric-resource/` | S8.4 | `src/benchmark/metrics/resource.py` | Metric: Resource Efficiency | Optimality gap vs OR-Tools baseline | pending |
-| S8.8 | `specs/spec-S8.8-metric-coordination/` | S8.4 | `src/benchmark/metrics/coordination.py` | Metric: Coordination Quality | Inter-agent information sharing, milestone KPIs | pending |
-| S8.9 | `specs/spec-S8.9-metric-communication/` | S8.4 | `src/benchmark/metrics/communication.py` | Metric: Communication Appropriateness | LLM-as-judge for multilingual quality + NDMA guideline adherence | pending |
-| S8.10 | `specs/spec-S8.10-aggregate-drs/` | S8.5-S8.9 | `src/benchmark/metrics/aggregate.py` | Aggregate Disaster Response Score (DRS) | Weighted combination, configurable weights, pass@k reliability | pending |
-| S8.11 | `specs/spec-S8.11-self-evolving/` | S8.2, S6.6 | `src/benchmark/self_evolving.py` | Self-evolving benchmark generator | Auto-generate from historical data, contamination detection, perturbation ops | pending |
+| S8.1 | `specs/spec-S8.1-scenario-models/` | S2.1, S2.2 | `src/benchmark/models.py` | Scenario data models + storage | BenchmarkScenario, EventSequence, GroundTruth Pydantic models + DB CRUD | done |
+| S8.2 | `specs/spec-S8.2-scenario-manager/` | S8.1 | `src/benchmark/scenario_manager.py` | Scenario manager | CRUD, category filtering, complexity levels, version tracking | done |
+| S8.3 | `specs/spec-S8.3-scenario-runner/` | S8.2, S7.9 | `src/benchmark/scenario_runner.py` | Scenario runner with simulated clock | Deterministic replay, configurable acceleration (5x), event injection | done |
+| S8.4 | `specs/spec-S8.4-evaluation-engine/` | S8.3, S2.6 | `src/benchmark/evaluation_engine.py` | Evaluation engine (LLM-as-judge) | DeepSeek Reasoner as judge, structured scoring rubric, multi-dimensional | done |
+| S8.5 | `specs/spec-S8.5-metric-situational/` | S8.4 | `src/benchmark/metrics/situational.py` | Metric: Situational Accuracy | Precision/recall/F1 against IMD/CWC ground truth bulletins | done |
+| S8.6 | `specs/spec-S8.6-metric-timeliness/` | S8.4 | `src/benchmark/metrics/timeliness.py` | Metric: Decision Timeliness | Measured against NDMA SOP time windows | done |
+| S8.7 | `specs/spec-S8.7-metric-resource/` | S8.4 | `src/benchmark/metrics/resource.py` | Metric: Resource Efficiency | Optimality gap vs OR-Tools baseline | done |
+| S8.8 | `specs/spec-S8.8-metric-coordination/` | S8.4 | `src/benchmark/metrics/coordination.py` | Metric: Coordination Quality | Inter-agent information sharing, milestone KPIs | done |
+| S8.9 | `specs/spec-S8.9-metric-communication/` | S8.4 | `src/benchmark/metrics/communication.py` | Metric: Communication Appropriateness | LLM-as-judge for multilingual quality + NDMA guideline adherence | done |
+| S8.10 | `specs/spec-S8.10-aggregate-drs/` | S8.5-S8.9 | `src/benchmark/metrics/aggregate.py` | Aggregate Disaster Response Score (DRS) | Weighted combination, configurable weights, pass@k reliability | done |
+| S8.11 | `specs/spec-S8.11-self-evolving/` | S8.2, S6.6 | `src/benchmark/self_evolving.py` | Self-evolving benchmark generator | Auto-generate from historical data, contamination detection, perturbation ops | done |
 
 ### Interview Q&A — Phase 8
 
@@ -380,17 +380,17 @@ A: Oracle's Always Free tier is genuinely permanent — 4 ARM Ampere cores, 24GB
 | S7.7 | InfraStatus agent | 7 | S7.1, S6.3 | done |
 | S7.8 | HistoricalMemory agent | 7 | S7.1, S6.1, S6.2 | done |
 | S7.9 | Agent integration test | 7 | S7.2-S7.8, S3.2 | done |
-| S8.1 | Benchmark scenario models | 8 | S2.1, S2.2 | pending |
-| S8.2 | Scenario manager | 8 | S8.1 | pending |
-| S8.3 | Scenario runner (simulated clock) | 8 | S8.2, S7.9 | pending |
-| S8.4 | Evaluation engine (LLM-as-judge) | 8 | S8.3, S2.6 | pending |
-| S8.5 | Metric: Situational Accuracy | 8 | S8.4 | pending |
-| S8.6 | Metric: Decision Timeliness | 8 | S8.4 | pending |
-| S8.7 | Metric: Resource Efficiency | 8 | S8.4 | pending |
-| S8.8 | Metric: Coordination Quality | 8 | S8.4 | pending |
-| S8.9 | Metric: Communication Appropriateness | 8 | S8.4 | pending |
-| S8.10 | Aggregate DRS scoring | 8 | S8.5-S8.9 | pending |
-| S8.11 | Self-evolving generator | 8 | S8.2, S6.6 | pending |
+| S8.1 | Benchmark scenario models | 8 | S2.1, S2.2 | done |
+| S8.2 | Scenario manager | 8 | S8.1 | done |
+| S8.3 | Scenario runner (simulated clock) | 8 | S8.2, S7.9 | done |
+| S8.4 | Evaluation engine (LLM-as-judge) | 8 | S8.3, S2.6 | done |
+| S8.5 | Metric: Situational Accuracy | 8 | S8.4 | done |
+| S8.6 | Metric: Decision Timeliness | 8 | S8.4 | done |
+| S8.7 | Metric: Resource Efficiency | 8 | S8.4 | done |
+| S8.8 | Metric: Coordination Quality | 8 | S8.4 | done |
+| S8.9 | Metric: Communication Appropriateness | 8 | S8.4 | done |
+| S8.10 | Aggregate DRS scoring | 8 | S8.5-S8.9 | done |
+| S8.11 | Self-evolving generator | 8 | S8.2, S6.6 | done |
 | S9.1 | Agentic Plan Caching | 9 | S6.1, S7.9 | pending |
 | S9.2 | Dashboard full integration | 9 | S3.4-S3.7, S7.9, S8.4 | pending |
 | S9.3 | Langfuse full integration | 9 | S2.5, S7.1 | pending |

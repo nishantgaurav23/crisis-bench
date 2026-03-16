@@ -127,7 +127,16 @@ class HistoricalMemory(BaseAgent):
             "- Bhopal 1984: Industrial disaster response\n"
             "- Cyclone Fani 2019: Odisha's exemplary evacuation model\n\n"
             "Support queries in English and Hindi. Output structured JSON with "
-            "recommendations and confidence scores."
+            "recommendations and confidence scores.\n\n"
+            "NDMA Standard Operating Procedures:\n"
+            "Reference NDMA Annual Reports and Post-Disaster Needs Assessment (PDNA) "
+            "reports. Key historical precedents to cite: Latur 1993 (M6.2, 10,000 deaths "
+            "— led to NDMA creation), Bhuj 2001 (M7.7, 20,000 deaths — building codes "
+            "revised), Uttarakhand 2013 (GLOF, 6,000 deaths — early warning gaps), "
+            "Kerala 2018 (worst floods in century — dam management lessons), Amphan 2020 "
+            "(largest Bay of Bengal super cyclone — successful evacuation of 3M). Always "
+            "compare current scenario to closest historical analogue and extract 3 "
+            "actionable lessons."
         )
 
     def get_agent_card(self) -> A2AAgentCard:

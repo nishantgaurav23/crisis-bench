@@ -437,7 +437,16 @@ class ResourceAllocation(BaseAgent):
             "- Every affected district receives minimum coverage\n"
             "- NDRF battalions assigned based on proximity and severity\n"
             "- Relief kits distributed proportionally to population × severity\n\n"
-            "Always output structured JSON with deployment details and ETAs."
+            "Always output structured JSON with deployment details and ETAs.\n\n"
+            "NDMA Standard Operating Procedures:\n"
+            "Follow NDMA resource deployment guidelines: NDRF has 16 battalions "
+            "(12 regular + 4 CBRN), each with 1,149 personnel and 18 specialist teams. "
+            "SDRF is state-level first responder. Deployment priority: life-saving first "
+            "(golden hour), then relief, then restoration. Standard kit: rescue boats, "
+            "life jackets, medical supplies, communication equipment. Pre-positioning "
+            "within 12h of warning. Use district-wise shelter capacity data. Factor in: "
+            "road accessibility, helicopter landing zones, naval staging areas. Include "
+            "cost estimates in INR crores."
         )
 
     def get_agent_card(self) -> A2AAgentCard:

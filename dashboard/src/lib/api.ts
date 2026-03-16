@@ -52,8 +52,41 @@ export function getHealth(): Promise<HealthStatus> {
   return request<HealthStatus>("/health");
 }
 
-export function getDisasters(): Promise<Disaster[]> {
-  return request<Disaster[]>("/api/v1/disasters");
+const SEVERITY_MAP: Record<number, "low" | "medium" | "high" | "critical"> = {
+  1: "low",
+  2: "low",
+  3: "medium",
+  4: "high",
+  5: "critical",
+};
+
+// Transform backend Disaster model to dashboard format
+// Backend uses severity as int (1-5), location as {latitude, longitude}
+// Dashboard expects severity as string, location as {lat, lng, name, state}
+function transformDisaster(raw: Record<string, unknown>): Disaster {
+  const loc = raw.location as Record<string, unknown> | null;
+  const states = (raw.affected_state_ids as number[]) || [];
+  return {
+    id: raw.id as string,
+    type: (raw.type as string) as Disaster["type"],
+    title: (raw.title as string) || `${raw.type} event`,
+    severity: SEVERITY_MAP[(raw.severity as number) || 1] || "medium",
+    phase: (raw.phase as string) as Disaster["phase"],
+    location: {
+      lat: loc ? (loc.latitude as number) : 20.5,
+      lng: loc ? (loc.longitude as number) : 78.9,
+      name: (raw.title as string) || "Unknown",
+      state: states.length > 0 ? `State ${states[0]}` : "India",
+    },
+    affected_population: raw.affected_population as number | undefined,
+    created_at: (raw.start_time as string) || new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+}
+
+export async function getDisasters(): Promise<Disaster[]> {
+  const raw = await request<Record<string, unknown>[]>("/api/v1/disasters");
+  return raw.map(transformDisaster);
 }
 
 export function getDisaster(id: string): Promise<Disaster> {
@@ -105,6 +138,14 @@ export function getEvaluationRuns(
 
 export function getEvaluationRun(id: string): Promise<EvaluationRunSummary> {
   return request<EvaluationRunSummary>(`/api/v1/benchmark/runs/${id}`);
+}
+
+// Run Benchmark
+
+export function runBenchmark(
+  scenarioId: string
+): Promise<{ run_id: string; scenario_id: string; status: string; message: string }> {
+  return request(`/api/v1/benchmark/run/${scenarioId}`, { method: "POST" });
 }
 
 // Metrics API

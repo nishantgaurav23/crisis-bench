@@ -12,7 +12,8 @@ async def health():
     """Returns system health status."""
     settings = get_settings()
     return {
-        "status": "ok",
+        "status": "healthy",
         "version": "0.1.0",
         "environment": settings.ENVIRONMENT,
+        "services": {},
     }

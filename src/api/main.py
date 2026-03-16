@@ -1,5 +1,6 @@
 """FastAPI application factory for CRISIS-BENCH API gateway."""
 
+import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
@@ -8,13 +9,32 @@ from fastapi.responses import JSONResponse
 
 from src.shared.errors import CrisisError
 
+from .neo4j_setup import ensure_neo4j_ready
+from .rag_setup import ensure_rag_ready
 from .routes import agents, benchmark, disasters, health, metrics
 from .websocket import websocket_endpoint
+
+logger = logging.getLogger("crisis.api")
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Startup/shutdown lifecycle. Will init DB pools in later specs."""
+    """Startup/shutdown lifecycle — initialises RAG collections and Neo4j graph."""
+    rag_ok = await ensure_rag_ready()
+    if rag_ok:
+        logger.info("RAG subsystem ready — ChromaDB seeded and available")
+    else:
+        logger.warning(
+            "RAG subsystem unavailable — agents will operate without RAG context"
+        )
+
+    neo4j_ok = await ensure_neo4j_ready()
+    if neo4j_ok:
+        logger.info("Neo4j infrastructure graph ready — 10 states seeded")
+    else:
+        logger.warning(
+            "Neo4j unavailable — InfraStatus agent will operate without graph data"
+        )
     yield
 
 

@@ -1,18 +1,20 @@
 export type DisasterType =
-  | "flood"
+  | "monsoon_flood"
   | "cyclone"
+  | "urban_waterlogging"
   | "earthquake"
+  | "heatwave"
   | "landslide"
+  | "industrial_accident"
+  | "tsunami"
   | "drought"
-  | "heat_wave"
-  | "industrial";
+  | "glacial_lake_outburst";
 
 export type DisasterPhase =
-  | "monitoring"
-  | "alert"
-  | "active"
-  | "response"
-  | "recovery";
+  | "pre_event"
+  | "active_response"
+  | "recovery"
+  | "post_event";
 
 export type Severity = "low" | "medium" | "high" | "critical";
 
@@ -119,6 +121,8 @@ export interface ScenarioSummary {
   id: string;
   category: string;
   complexity: string;
+  title: string;
+  description: string;
   affected_states: string[];
   event_count: number;
   source: string;

@@ -186,8 +186,8 @@ class LLMRouter:
 
         self._init_providers()
         self._tier_chains: dict[str, list[str]] = {
-            "critical": ["deepseek_reasoner", "kimi", "groq_free", "ollama_local"],
-            "standard": ["deepseek_chat", "qwen_flash", "groq_free", "ollama_local"],
+            "critical": ["deepseek_reasoner", "kimi", "gemini_free", "groq_free", "ollama_local"],
+            "standard": ["deepseek_chat", "qwen_flash", "gemini_free", "groq_free", "ollama_local"],
             "routine": ["qwen_flash", "groq_free", "gemini_free", "ollama_local"],
             "vision": ["qwen_vl", "ollama_local"],
         }
@@ -256,6 +256,11 @@ class LLMRouter:
         chain = self._tier_chains.get(tier_str, self._tier_chains["standard"])
         errors: list[str] = []
 
+        # For critical/standard tiers falling through to Gemini, add thinking
+        # instructions so the model uses its built-in chain-of-thought
+        _thinking_tiers = {"critical", "standard"}
+        _thinking_providers = {"gemini_free"}
+
         for provider_key in chain:
             provider = self._providers[provider_key]
 
@@ -276,9 +281,38 @@ class LLMRouter:
                 continue
 
             try:
+                # Inject thinking instructions for critical/standard on weaker providers
+                call_messages = messages
+                call_max_tokens = max_tokens
+                if (
+                    tier_str in _thinking_tiers
+                    and provider_key in _thinking_providers
+                    and messages
+                ):
+                    thinking_prefix = (
+                        "Think through this step-by-step before answering. "
+                        "Consider multiple angles, potential risks, and "
+                        "second-order consequences. Be thorough and specific."
+                    )
+                    # Prepend thinking instruction to the last user message
+                    call_messages = list(messages)
+                    for i in range(len(call_messages) - 1, -1, -1):
+                        if call_messages[i].get("role") == "user":
+                            call_messages[i] = {
+                                **call_messages[i],
+                                "content": (
+                                    f"{thinking_prefix}\n\n"
+                                    f"{call_messages[i]['content']}"
+                                ),
+                            }
+                            break
+                    # Allow more tokens for thinking
+                    if call_max_tokens and call_max_tokens < 1024:
+                        call_max_tokens = 1024
+
                 result = await self._call_provider(
-                    provider, tier_str, messages,
-                    max_tokens=max_tokens,
+                    provider, tier_str, call_messages,
+                    max_tokens=call_max_tokens,
                     temperature=temperature,
                     timeout=timeout,
                     trace_id=trace_id,

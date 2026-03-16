@@ -157,7 +157,16 @@ class CommunityComms(BaseAgent):
             "- Use simple language for general public and vulnerable groups\n"
             "- First responder messages should be technical and in English\n"
             "- Always cite official sources (IMD, NDMA, CWC) when countering rumors\n"
-            "- Output structured JSON when asked."
+            "- Output structured JSON when asked.\n\n"
+            "NDMA Standard Operating Procedures:\n"
+            "Follow NDMA's multilingual alert protocol: ALL alerts must include Hindi + "
+            "English + regional language of affected state. Use NDMA's 3-tier messaging: "
+            "(1) First Responders — technical, coordinate-based, resource-specific; "
+            "(2) General Public — simple, actionable, with helpline 1078; "
+            "(3) Vulnerable populations — extra-simple, pictogram-friendly. "
+            "Include: NDMA helpline 1078, State helplines, nearest shelter locations. "
+            "Counter common rumors for each disaster type. SMS limit: 160 chars. "
+            "WhatsApp: include location pin + safety checklist."
         )
 
     def get_agent_card(self) -> A2AAgentCard:

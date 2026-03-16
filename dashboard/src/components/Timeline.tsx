@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import type {
   TimelineEvent,
   WebSocketEventType,
@@ -45,8 +45,8 @@ export function formatRelativeTime(isoTimestamp: string): string {
   return `${diffDay}d ago`;
 }
 
-const baseTime = Date.now();
-
+// Fixed timestamps to avoid SSR/client hydration mismatch
+// (Date.now() at module load differs between server and client)
 export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
   {
     id: "evt-001",
@@ -54,7 +54,7 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     title: "Cyclone Vardah Alert",
     description: "IMD issued Red Alert for Odisha coast — Category 4 cyclone expected landfall in 48h",
     severity: "critical",
-    timestamp: new Date(baseTime - 0).toISOString(),
+    timestamp: "2026-03-16T10:00:00Z",
   },
   {
     id: "evt-002",
@@ -63,7 +63,7 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     description: "Mission decomposition started for cyclone response",
     severity: "high",
     agent_type: "orchestrator",
-    timestamp: new Date(baseTime - 30000).toISOString(),
+    timestamp: "2026-03-16T09:59:30Z",
   },
   {
     id: "evt-003",
@@ -72,7 +72,7 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     description: "Fusing IMD, SACHET, and social media feeds",
     severity: "medium",
     agent_type: "situation_sense",
-    timestamp: new Date(baseTime - 60000).toISOString(),
+    timestamp: "2026-03-16T09:59:00Z",
   },
   {
     id: "evt-004",
@@ -81,8 +81,8 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     description: "Evacuate 3 coastal districts: Puri, Ganjam, Jagatsinghpur",
     severity: "critical",
     agent_type: "orchestrator",
-    phase: "response",
-    timestamp: new Date(baseTime - 120000).toISOString(),
+    phase: "active_response",
+    timestamp: "2026-03-16T09:58:00Z",
   },
   {
     id: "evt-005",
@@ -90,8 +90,8 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     title: "Phase: Alert to Response",
     description: "Disaster phase transitioned from alert to active response",
     severity: "high",
-    phase: "response",
-    timestamp: new Date(baseTime - 180000).toISOString(),
+    phase: "active_response",
+    timestamp: "2026-03-16T09:57:00Z",
   },
   {
     id: "evt-006",
@@ -100,7 +100,7 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     description: "12 battalions allocated across 3 districts via OR-Tools optimization",
     severity: "high",
     agent_type: "resource_allocation",
-    timestamp: new Date(baseTime - 240000).toISOString(),
+    timestamp: "2026-03-16T09:56:00Z",
   },
   {
     id: "evt-007",
@@ -109,7 +109,7 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     description: "Multilingual alerts dispatched in Odia, Hindi, English",
     severity: "medium",
     agent_type: "community_comms",
-    timestamp: new Date(baseTime - 300000).toISOString(),
+    timestamp: "2026-03-16T09:55:00Z",
   },
   {
     id: "evt-008",
@@ -118,7 +118,7 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     description: "Power grid cascading failure predicted for 4 substations",
     severity: "high",
     agent_type: "infra_status",
-    timestamp: new Date(baseTime - 360000).toISOString(),
+    timestamp: "2026-03-16T09:54:00Z",
   },
   {
     id: "evt-009",
@@ -126,7 +126,7 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     title: "Token Budget Update",
     description: "Total spend: $0.12 across 47 LLM calls",
     severity: "low",
-    timestamp: new Date(baseTime - 420000).toISOString(),
+    timestamp: "2026-03-16T09:53:00Z",
   },
   {
     id: "evt-010",
@@ -135,9 +135,30 @@ export const MOCK_TIMELINE_EVENTS: TimelineEvent[] = [
     description: "Retrieved 1999 Odisha Super Cyclone analogues from NDMA archive",
     severity: "medium",
     agent_type: "historical_memory",
-    timestamp: new Date(baseTime - 480000).toISOString(),
+    timestamp: "2026-03-16T09:52:00Z",
   },
 ];
+
+/** Client-only relative timestamp to avoid SSR hydration mismatch. */
+function RelativeTimestamp({ eventId, timestamp }: { eventId: string; timestamp: string }) {
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    setText(formatRelativeTime(timestamp));
+    const interval = setInterval(() => setText(formatRelativeTime(timestamp)), 30000);
+    return () => clearInterval(interval);
+  }, [timestamp]);
+
+  return (
+    <span
+      data-testid={`timestamp-${eventId}`}
+      className="mt-1 block text-xs text-gray-600"
+      title={timestamp}
+    >
+      {text}
+    </span>
+  );
+}
 
 interface TimelineProps {
   events?: TimelineEvent[];
@@ -242,13 +263,10 @@ export default function Timeline({
                 <p className="mt-1 text-xs text-gray-400">{event.description}</p>
               )}
 
-              <span
-                data-testid={`timestamp-${event.id}`}
-                className="mt-1 block text-xs text-gray-600"
-                title={event.timestamp}
-              >
-                {formatRelativeTime(event.timestamp)}
-              </span>
+              <RelativeTimestamp
+                eventId={event.id}
+                timestamp={event.timestamp}
+              />
             </div>
           </div>
         ))}

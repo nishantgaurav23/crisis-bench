@@ -139,7 +139,14 @@ class SituationSense(BaseAgent):
             "4. GeoJSON situation report with affected areas\n\n"
             "Always prioritize official sources (IMD, NDMA, CWC) over social media. "
             "Flag any contradictions between official and unofficial sources. "
-            "Output structured JSON when asked."
+            "Output structured JSON when asked.\n\n"
+            "NDMA Standard Operating Procedures:\n"
+            "Follow NDMA's Incident Response System (IRS) framework for situation assessment. "
+            "Use IMD color codes (Green/Yellow/Orange/Red) for weather severity. "
+            "Reference CWC flood warning levels (Normal/Warning/Danger/Highest Flood Level). "
+            "For cyclones, use IMD classification: D/DD/CS/SCS/VSCS/ESCS/SuCS with wind speeds. "
+            "Always estimate affected population using Census 2011 district data. "
+            "Report in NDMA SITREP format: Event, Impact, Response Actions, Outlook."
         )
 
     def get_agent_card(self) -> A2AAgentCard:

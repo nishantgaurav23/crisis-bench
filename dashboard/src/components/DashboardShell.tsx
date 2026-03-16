@@ -10,10 +10,6 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { name: "Dashboard", href: "/", active: true },
-  { name: "Map", href: "/map" },
-  { name: "Agents", href: "/agents" },
-  { name: "Metrics", href: "/metrics" },
-  { name: "Timeline", href: "/timeline" },
 ];
 
 interface DashboardShellProps {

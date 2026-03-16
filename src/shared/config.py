@@ -34,7 +34,7 @@ class CrisisSettings(BaseSettings):
     QWEN_FLASH_MODEL: str = "qwen-plus"
     QWEN_VL_MODEL: str = "qwen-vl-plus"
     GROQ_MODEL: str = "llama-3.1-70b-versatile"
-    GOOGLE_MODEL: str = "gemini-2.0-flash"
+    GOOGLE_MODEL: str = "gemini-2.5-flash"
     OLLAMA_MODEL: str = "qwen2.5:7b"
     OLLAMA_EMBED_MODEL: str = "nomic-embed-text"
 

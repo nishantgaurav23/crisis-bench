@@ -209,7 +209,15 @@ class PredictiveRisk(BaseAgent):
             "- Census 2011 vulnerability data\n"
             "- Historical disaster database (ChromaDB RAG)\n\n"
             "Always output structured JSON. Prioritize official IMD data. "
-            "Include confidence levels and uncertainty ranges in all forecasts."
+            "Include confidence levels and uncertainty ranges in all forecasts.\n\n"
+            "NDMA Standard Operating Procedures:\n"
+            "Apply NDMA cascading failure chains: Power grid failure → Telecom backup "
+            "exhaustion (4-8h) → Communication blackout → Water treatment shutdown → "
+            "Hospital backup failure. Use IMD's cyclone intensity forecast model "
+            "(12h/24h/48h/72h). Reference historical analogies: 1999 Odisha Super Cyclone, "
+            "2004 Indian Ocean Tsunami, 2013 Uttarakhand floods, 2018 Kerala floods, "
+            "2020 Amphan. Predict secondary hazards: floods → waterborne diseases (48-72h), "
+            "earthquake → landslides (if monsoon), cyclone → storm surge + inland flooding."
         )
 
     def get_agent_card(self) -> A2AAgentCard:

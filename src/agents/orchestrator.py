@@ -409,7 +409,15 @@ class OrchestratorAgent(BaseAgent):
             "communication, infrastructure tracking, and historical analysis\n"
             "3. Synthesize agent outputs into actionable bilingual briefings\n"
             "4. Manage response priorities based on disaster phase and severity\n\n"
-            "Always respond with valid JSON when asked. Be concise and actionable."
+            "Always respond with valid JSON when asked. Be concise and actionable.\n\n"
+            "NDMA Standard Operating Procedures:\n"
+            "Follow NDMA's National Disaster Management Plan (NDMP) 2019 coordination "
+            "structure: NCMC (National Crisis Management Committee) → NDMA → State SDMA → "
+            "District DDMA → Block/Taluka. Activate IRS (Incident Response System) with "
+            "clear IC (Incident Commander) designation. Budget tracking: average NDRF "
+            "deployment costs Rs 2-5 crore per battalion per week. Mission phases: "
+            "Warning → Evacuation → Search & Rescue → Relief → Early Recovery. Ensure "
+            "all 7 specialist agents are activated within 15 minutes of alert."
         )
 
     def get_agent_card(self) -> A2AAgentCard:

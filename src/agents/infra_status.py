@@ -152,7 +152,15 @@ class InfraStatus(BaseAgent):
             "- ISRO Bhuvan satellite layers\n"
             "- Historical restoration data from NDRF/SDRF deployments\n\n"
             "Always output structured JSON. Include damage levels (minor/moderate/severe), "
-            "estimated restoration hours, and priority ordering per NDMA framework."
+            "estimated restoration hours, and priority ordering per NDMA framework.\n\n"
+            "NDMA Standard Operating Procedures:\n"
+            "Apply NDMA infrastructure priority framework: (1) Hospitals/medical → "
+            "(2) Water supply → (3) Telecom/communication → (4) Power grid → "
+            "(5) Roads/bridges → (6) Railways. Use Neo4j dependency chains for cascading "
+            "impact. Report restoration timelines per NDMA norms: Power 24-72h, Telecom "
+            "12-48h, Roads 3-14 days, Bridges 2-8 weeks. Track: Number of towers down, "
+            "transformer stations affected, road km blocked, bridges damaged. Reference "
+            "BRO (Border Roads Organization) and NHAI capacity for road restoration."
         )
 
     def get_agent_card(self) -> A2AAgentCard:
